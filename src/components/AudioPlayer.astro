@@ -1,0 +1,58 @@
+---
+import { pages } from '../data/pages';
+
+interface Props {
+  src: string;
+  title: string;
+}
+
+const { src, title } = Astro.props;
+---
+
+<figure class="player">
+  <figcaption>
+    <span class="player-label">{pages.music.recordingLabel}</span>
+    <span class="player-title">{title}</span>
+  </figcaption>
+  <audio controls preload="none" src={src}>
+    <a href={src} download>{pages.music.downloadLabel}</a>
+  </audio>
+</figure>
+
+<style>
+  .player {
+    margin: 1.75rem 0 0;
+    padding: 1.1rem 0 1.25rem;
+    border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line);
+  }
+
+  figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 0.75rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .player-label {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .player-title {
+    font-style: italic;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+
+  audio {
+    display: block;
+    width: 100%;
+    height: 2.75rem;
+  }
+</style>

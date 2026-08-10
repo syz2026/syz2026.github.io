@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/profile';
+import { pages } from '../data/pages';
+---
+
+<BaseLayout title={pages.home.title} description={pages.home.description}>
+  <h1 class="name">{profile.name}</h1>
+  <p class="tagline">{profile.tagline}</p>
+
+  <figure class="headshot">
+    <img
+      src={profile.headshot}
+      alt="Studio headshot of Stephen Zhang in a dark blazer and white shirt, against a plain grey background"
+      width="759"
+      height="800"
+      decoding="async"
+    />
+  </figure>
+
+  <div class="bio">
+    {profile.bio.map((paragraph) => <p>{paragraph}</p>)}
+  </div>
+
+  <ul class="contact-links">
+    {
+      profile.links.map((link) => (
+        <li>
+          <a href={link.href}>{link.label}</a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
+
+<style>
+  .name {
+    font-size: clamp(2rem, 1.55rem + 2.6vw, 2.55rem);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+  }
+
+  .tagline {
+    margin-top: 0.55rem;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  .headshot {
+    margin: 1.75rem auto 0.5rem;
+    max-width: 15rem;
+  }
+
+  .headshot img {
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+  }
+
+  .bio {
+    max-width: var(--prose-max);
+  }
+
+  .bio p + p {
+    margin-top: 1rem;
+  }
+
+  .bio p:first-of-type {
+    margin-top: 1.5rem;
+  }
+
+  .contact-links {
+    clear: both;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.4rem;
+    margin: 2rem 0 0;
+    padding: 1.4rem 0 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .contact-links a {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+  }
+
+  @media (min-width: 40rem) {
+    .headshot {
+      float: right;
+      margin: 0.4rem 0 1.25rem 2rem;
+      width: 12.5rem;
+    }
+  }
+</style>

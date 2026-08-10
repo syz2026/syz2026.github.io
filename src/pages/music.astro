@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MusicCard from '../components/MusicCard.astro';
+import EmptyState from '../components/EmptyState.astro';
+import { pages } from '../data/pages';
+import { getMusic } from '../lib/collections';
+
+const works = await getMusic();
+---
+
+<BaseLayout title={pages.music.title} description={pages.music.description}>
+  <h1 class="page-title">{pages.music.title}</h1>
+  <p class="lede">{pages.music.intro}</p>
+
+  <section class="section" aria-labelledby="works-heading">
+    <h2 id="works-heading">{pages.music.worksHeading}</h2>
+    {
+      works.length > 0 ? (
+        <ul class="entries">
+          {works.map((entry) => (
+            <MusicCard entry={entry} />
+          ))}
+        </ul>
+      ) : (
+        <EmptyState text={pages.music.empty} />
+      )
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .page-title {
+    font-size: clamp(1.7rem, 1.4rem + 1.8vw, 2.1rem);
+    letter-spacing: -0.015em;
+  }
+
+  .lede {
+    max-width: var(--prose-max);
+    margin-top: 1rem;
+    font-size: 1.06rem;
+    color: var(--ink-2);
+  }
+
+  .section > h2 {
+    margin-bottom: 1.4rem;
+  }
+</style>

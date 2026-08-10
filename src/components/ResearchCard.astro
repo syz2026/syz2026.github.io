@@ -1,0 +1,46 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { RESEARCH_STATUS_LABEL } from '../lib/collections';
+import { pages } from '../data/pages';
+
+interface Props {
+  entry: CollectionEntry<'research'>;
+}
+
+const { entry } = Astro.props;
+const { title, status, year, question, summary, tags, links } = entry.data;
+
+const linkEntries = (
+  links ? Object.entries(links) : []
+) as [keyof typeof pages.research.linkLabels, string][];
+---
+
+<li class="entry">
+  <div class="entry-head">
+    <h3 class="entry-title">
+      <a href={`/research/${entry.id}/`}>{title}</a>
+    </h3>
+    <span class="status" data-status={status}>
+      {RESEARCH_STATUS_LABEL[status]}
+    </span>
+  </div>
+  <p class="question">{question}</p>
+  <p class="summary">{summary}</p>
+  <p class="meta">
+    <span>{year}</span>
+    {tags.map((tag) => <span>{tag}</span>)}
+    {
+      linkEntries.map(([key, href]) => (
+        <a href={href} rel="noopener">
+          {pages.research.linkLabels[key]}
+        </a>
+      ))
+    }
+  </p>
+</li>
+
+<style>
+  .meta {
+    margin-top: 0.7rem;
+  }
+</style>

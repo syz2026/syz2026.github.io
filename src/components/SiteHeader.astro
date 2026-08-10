@@ -1,0 +1,95 @@
+---
+import { profile } from '../data/profile';
+import { nav } from '../data/pages';
+
+const pathname = Astro.url.pathname;
+const isCurrent = (href: string) =>
+  href === '/' ? pathname === '/' : pathname.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-name" href="/" aria-label={`${profile.name}, home`}>
+      {profile.name}
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header-inner {
+    max-width: var(--site-max);
+    margin: 0 auto;
+    padding: 1.4rem var(--gutter) 1.3rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.6rem 1.5rem;
+  }
+
+  .site-name {
+    font-family: var(--font-sans);
+    font-size: 1.06rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .site-name:hover {
+    color: var(--accent);
+  }
+
+  .site-nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.35rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-nav a {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    text-decoration: none;
+    padding-bottom: 0.15rem;
+    border-bottom: 2px solid transparent;
+  }
+
+  .site-nav a:hover {
+    color: var(--accent);
+  }
+
+  .site-nav a[aria-current='page'] {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .site-nav a {
+      transition: color 140ms ease, border-bottom-color 140ms ease;
+    }
+  }
+</style>

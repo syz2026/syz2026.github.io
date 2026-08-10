@@ -1,0 +1,64 @@
+---
+import type { Position } from '../data/profile';
+
+interface Props {
+  items: Position[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="entries">
+  {
+    items.map((position) => (
+      <li class="entry">
+        <div class="entry-head">
+          <h3 class="entry-title">{position.organization}</h3>
+          <span class="dates">
+            {position.start} &ndash; {position.end}
+          </span>
+        </div>
+        <p class="role">
+          {position.role} <span aria-hidden="true">·</span> {position.location}
+        </p>
+        <ul class="bullets">
+          {position.bullets.map((bullet) => (
+            <li>{bullet}</li>
+          ))}
+        </ul>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .role {
+    margin-top: 0.3rem;
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  .bullets {
+    list-style: none;
+    margin: 0.6rem 0 0;
+    padding: 0;
+    max-width: var(--prose-max);
+  }
+
+  .bullets li {
+    position: relative;
+    padding-left: 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .bullets li + li {
+    margin-top: 0.3rem;
+  }
+
+  .bullets li::before {
+    content: '\2013';
+    position: absolute;
+    left: 0.15rem;
+    color: var(--ink-3);
+  }
+</style>

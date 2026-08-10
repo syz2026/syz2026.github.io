@@ -1,0 +1,58 @@
+---
+import type { Publication } from '../data/publications';
+
+interface Props {
+  items: readonly Publication[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="entries">
+  {
+    items.map((pub) => (
+      <li class="entry">
+        <h3 class="entry-title">
+          {pub.href ? (
+            <a href={pub.href} rel="noopener">
+              {pub.title}
+            </a>
+          ) : (
+            pub.title
+          )}
+        </h3>
+        <p class="authors">{pub.authors}</p>
+        <p class="meta">
+          <span class="venue">
+            {pub.venue}
+            {pub.detail && `, ${pub.detail}`}
+          </span>
+          <span>{pub.year}</span>
+          {pub.secondary && (
+            <a href={pub.secondary.href} rel="noopener">
+              {pub.secondary.label}
+            </a>
+          )}
+        </p>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .authors {
+    margin-top: 0.35rem;
+    font-size: 0.95rem;
+    color: var(--ink-2);
+  }
+
+  .entry .meta {
+    margin-top: 0.4rem;
+  }
+
+  .venue {
+    font-family: var(--font-serif);
+    font-size: 0.92rem;
+    font-style: italic;
+  }
+</style>

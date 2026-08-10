@@ -1,0 +1,196 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AudioPlayer from '../../components/AudioPlayer.astro';
+import { getMusic } from '../../lib/collections';
+import { pages } from '../../data/pages';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const entries = await getMusic();
+  return entries.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'music'>;
+}
+
+const { entry } = Astro.props as Props;
+const {
+  title,
+  year,
+  instrumentation,
+  duration,
+  blurb,
+  movements,
+  audio,
+  score,
+  status,
+} = entry.data;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={title} description={blurb} ogType="article">
+  <article>
+    <p class="back">
+      <a href="/music/"><span aria-hidden="true">&larr; </span>{pages.music.backLabel}</a>
+    </p>
+
+    <div class="article-meta">
+      {
+        status === 'in-progress' && (
+          <span class="status" data-status="in-progress">
+            {pages.music.inProgressLabel}
+          </span>
+        )
+      }
+      <p class="meta">
+        <span>{year}</span>
+        <span>{instrumentation}</span>
+        {duration && <span>{duration}</span>}
+      </p>
+    </div>
+
+    <h1 class="page-title">{title}</h1>
+
+    <p class="blurb-lede">{blurb}</p>
+
+    {audio && <AudioPlayer src={audio} title={title} />}
+
+    {
+      score && (
+        <p class="score-row">
+          <a class="score-link" href={score}>
+            {pages.music.scoreLabel}
+          </a>
+        </p>
+      )
+    }
+
+    {
+      movements && movements.length > 0 && (
+        <section class="movements" aria-labelledby="movements-heading">
+          <h2 id="movements-heading">{pages.music.movementsHeading}</h2>
+          <ol>
+            {movements.map((movement) => (
+              <li>
+                <span class="movement-title">{movement.title}</span>
+                {movement.duration && (
+                  <span class="dates">{movement.duration}</span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </section>
+      )
+    }
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .back {
+    margin-bottom: 2rem;
+  }
+
+  .back a {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+
+  .back a:hover {
+    color: var(--accent);
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .page-title {
+    font-size: clamp(1.65rem, 1.35rem + 1.8vw, 2.05rem);
+    letter-spacing: -0.015em;
+    max-width: 34rem;
+  }
+
+  .blurb-lede {
+    margin-top: 1.1rem;
+    max-width: var(--prose-max);
+    font-size: 1.06rem;
+    color: var(--ink-2);
+  }
+
+  .score-row {
+    margin-top: 1.5rem;
+  }
+
+  .score-link {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    padding: 0.45em 0.95em;
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .score-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .score-link {
+      transition: color 140ms ease, border-color 140ms ease;
+    }
+  }
+
+  .movements {
+    margin-top: 2.25rem;
+  }
+
+  .movements h2 {
+    font-size: 1.05rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .movements ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: var(--prose-max);
+    border-top: 1px solid var(--line);
+  }
+
+  .movements li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.2rem 1.25rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .movement-title {
+    font-size: 0.98rem;
+  }
+
+  .prose {
+    margin-top: 2rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--line);
+  }
+</style>

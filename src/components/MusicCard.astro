@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { pages } from '../data/pages';
+
+interface Props {
+  entry: CollectionEntry<'music'>;
+}
+
+const { entry } = Astro.props;
+const { title, year, instrumentation, duration, blurb, status } = entry.data;
+---
+
+<li class="entry">
+  <div class="entry-head">
+    <h3 class="entry-title">
+      <a href={`/music/${entry.id}/`}>{title}</a>
+    </h3>
+    {
+      status === 'in-progress' && (
+        <span class="status" data-status="in-progress">
+          {pages.music.inProgressLabel}
+        </span>
+      )
+    }
+  </div>
+  <p class="meta">
+    <span>{year}</span>
+    <span>{instrumentation}</span>
+    {duration && <span>{duration}</span>}
+  </p>
+  <p class="summary">{blurb}</p>
+</li>
+
+<style>
+  .meta {
+    margin-top: 0.35rem;
+  }
+
+  .summary {
+    margin-top: 0.45rem;
+  }
+</style>

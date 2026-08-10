@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import { profile } from '../data/profile';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const { title, description, ogType = 'website', noindex = false } = Astro.props;
+
+const site = Astro.site ?? new URL('https://syz2026.github.io');
+const canonical = new URL(Astro.url.pathname, site);
+const ogImage = new URL(profile.headshot, site);
+const fullTitle = title === profile.name ? title : `${title} · ${profile.name}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f5ef" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1a1914" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <SiteHeader />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>
+
+<style>
+  main {
+    max-width: var(--site-max);
+    margin: 0 auto;
+    padding: 2.75rem var(--gutter) 4.5rem;
+  }
+</style>

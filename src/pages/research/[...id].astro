@@ -1,0 +1,125 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getResearch, RESEARCH_STATUS_LABEL } from '../../lib/collections';
+import { pages } from '../../data/pages';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const entries = await getResearch();
+  return entries.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'research'>;
+}
+
+const { entry } = Astro.props as Props;
+const { title, status, year, question, summary, tags, links } = entry.data;
+const { Content } = await render(entry);
+
+const linkEntries = (
+  links ? Object.entries(links) : []
+) as [keyof typeof pages.research.linkLabels, string][];
+---
+
+<BaseLayout title={title} description={summary} ogType="article">
+  <article>
+    <p class="back">
+      <a href="/research/"><span aria-hidden="true">&larr; </span>{pages.research.backLabel}</a>
+    </p>
+
+    <div class="article-meta">
+      <span class="status" data-status={status}>
+        {RESEARCH_STATUS_LABEL[status]}
+      </span>
+      <p class="meta">
+        <span>{year}</span>
+        {tags.map((tag) => <span>{tag}</span>)}
+      </p>
+    </div>
+
+    <h1 class="page-title">{title}</h1>
+
+    <p class="question-lede">{question}</p>
+
+    {
+      linkEntries.length > 0 && (
+        <p class="meta links-row">
+          {linkEntries.map(([key, href]) => (
+            <a href={href} rel="noopener">
+              {pages.research.linkLabels[key]}
+            </a>
+          ))}
+        </p>
+      )
+    }
+
+    <p class="summary-lede">{summary}</p>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .back {
+    margin-bottom: 2rem;
+  }
+
+  .back a {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+
+  .back a:hover {
+    color: var(--accent);
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .page-title {
+    font-size: clamp(1.65rem, 1.35rem + 1.8vw, 2.05rem);
+    letter-spacing: -0.015em;
+    max-width: 34rem;
+  }
+
+  .question-lede {
+    margin-top: 1.1rem;
+    max-width: var(--prose-max);
+    font-size: 1.12rem;
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  .links-row {
+    margin-top: 1.1rem;
+  }
+
+  .links-row a {
+    color: var(--accent);
+  }
+
+  .summary-lede {
+    margin-top: 1.35rem;
+    max-width: var(--prose-max);
+  }
+
+  .prose {
+    margin-top: 2rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--line);
+  }
+</style>

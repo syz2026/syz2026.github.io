@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .letters { fill: #28251f; }
+    .rule { fill: #7a2e3a; }
+    @media (prefers-color-scheme: dark) {
+      .letters { fill: #e8e4d8; }
+      .rule { fill: #d89aa4; }
+    }
+  </style>
+  <text class="letters" x="32" y="42" text-anchor="middle"
+    font-family="Charter, Georgia, 'Times New Roman', serif"
+    font-size="34" letter-spacing="1">SZ</text>
+  <rect class="rule" x="17" y="50" width="30" height="3" />
+</svg>

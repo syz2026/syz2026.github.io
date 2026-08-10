@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'software'>;
+}
+
+const { entry } = Astro.props;
+const { name, blurb, stack, repo, year } = entry.data;
+---
+
+<li class="entry">
+  <div class="entry-head">
+    <h3 class="entry-title">
+      {
+        repo ? (
+          <a href={repo} rel="noopener">
+            {name}
+          </a>
+        ) : (
+          name
+        )
+      }
+    </h3>
+    {year && <span class="dates">{year}</span>}
+  </div>
+  <p class="summary">{blurb}</p>
+  {
+    stack.length > 0 && (
+      <p class="meta">
+        {stack.map((item) => (
+          <span>{item}</span>
+        ))}
+      </p>
+    )
+  }
+</li>
+
+<style>
+  .meta {
+    margin-top: 0.6rem;
+  }
+</style>
