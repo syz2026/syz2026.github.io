@@ -148,3 +148,12 @@ npm run build   # what actually ships, drafts excluded
 
 `npm run build` fails loudly if a required field is missing or a `status` value
 is not one of the allowed strings, so a malformed entry cannot reach the site.
+
+One quirk to know about. Astro 7.2 caches collection data in
+`node_modules/.astro/data-store.json`, and deleting an entry file does not
+always clear it, so a removed piece can keep generating its page. Adding and
+editing entries is unaffected. If a deleted entry will not go away:
+
+```bash
+rm -rf node_modules/.astro dist && npm run build
+```
