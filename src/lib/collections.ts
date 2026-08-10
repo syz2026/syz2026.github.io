@@ -1,4 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { selectEntries } from './ordering';
 
 /**
  * These collections are intentionally empty until entries are added, but Astro
@@ -21,34 +22,24 @@ async function getCollectionQuietly<C extends 'research' | 'music' | 'software'>
 }
 
 /** Drafts stay visible in `npm run dev` and are dropped from production builds. */
-const isVisible = (entry: { data: { draft: boolean } }) =>
-  import.meta.env.PROD ? !entry.data.draft : true;
-
-/** Explicit `order` wins; entries without one fall back to most recent first. */
-function byOrderThenYear<T extends { data: { order?: number; year?: number } }>(a: T, b: T) {
-  const ao = a.data.order;
-  const bo = b.data.order;
-  if (ao !== undefined && bo !== undefined) return ao - bo;
-  if (ao !== undefined) return -1;
-  if (bo !== undefined) return 1;
-  return (b.data.year ?? 0) - (a.data.year ?? 0);
-}
+const includeDrafts = !import.meta.env.PROD;
 
 export async function getResearch(): Promise<CollectionEntry<'research'>[]> {
-  return (await getCollectionQuietly('research')).filter(isVisible).sort(byOrderThenYear);
+  return selectEntries(await getCollectionQuietly('research'), includeDrafts);
 }
 
 export async function getMusic(): Promise<CollectionEntry<'music'>[]> {
-  return (await getCollectionQuietly('music')).filter(isVisible).sort(byOrderThenYear);
+  return selectEntries(await getCollectionQuietly('music'), includeDrafts);
 }
 
 export async function getSoftware(): Promise<CollectionEntry<'software'>[]> {
-  return (await getCollectionQuietly('software')).filter(isVisible).sort(byOrderThenYear);
+  return selectEntries(await getCollectionQuietly('software'), includeDrafts);
 }
 
-export const RESEARCH_STATUS_LABEL: Record<CollectionEntry<'research'>['data']['status'], string> = {
-  published: 'Published',
-  'complete-unsubmitted': 'Complete, unsubmitted',
-  draft: 'Draft',
-  'in-progress': 'In progress',
-};
+export const RESEARCH_STATUS_LABEL: Record<CollectionEntry<'research'>['data']['status'], string> =
+  {
+    published: 'Published',
+    'complete-unsubmitted': 'Complete, unsubmitted',
+    draft: 'Draft',
+    'in-progress': 'In progress',
+  };

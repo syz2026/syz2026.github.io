@@ -3,8 +3,7 @@ import { profile } from '../data/profile';
 import { nav } from '../data/pages';
 
 const pathname = Astro.url.pathname;
-const isCurrent = (href: string) =>
-  href === '/' ? pathname === '/' : pathname.startsWith(href);
+const isCurrent = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
 ---
 
 <header class="site-header">
@@ -17,10 +16,7 @@ const isCurrent = (href: string) =>
         {
           nav.map((item) => (
             <li>
-              <a
-                href={item.href}
-                aria-current={isCurrent(item.href) ? 'page' : undefined}
-              >
+              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
                 {item.label}
               </a>
             </li>
@@ -89,7 +85,9 @@ const isCurrent = (href: string) =>
 
   @media (prefers-reduced-motion: no-preference) {
     .site-nav a {
-      transition: color 140ms ease, border-bottom-color 140ms ease;
+      transition:
+        color 140ms ease,
+        border-bottom-color 140ms ease;
     }
   }
 </style>

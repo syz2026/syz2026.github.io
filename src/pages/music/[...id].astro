@@ -19,17 +19,8 @@ interface Props {
 }
 
 const { entry } = Astro.props as Props;
-const {
-  title,
-  year,
-  instrumentation,
-  duration,
-  blurb,
-  movements,
-  audio,
-  score,
-  status,
-} = entry.data;
+const { title, year, instrumentation, duration, blurb, movements, audio, score, status } =
+  entry.data;
 const { Content } = await render(entry);
 ---
 
@@ -78,9 +69,7 @@ const { Content } = await render(entry);
             {movements.map((movement) => (
               <li>
                 <span class="movement-title">{movement.title}</span>
-                {movement.duration && (
-                  <span class="dates">{movement.duration}</span>
-                )}
+                {movement.duration && <span class="dates">{movement.duration}</span>}
               </li>
             ))}
           </ol>
@@ -153,7 +142,9 @@ const { Content } = await render(entry);
 
   @media (prefers-reduced-motion: no-preference) {
     .score-link {
-      transition: color 140ms ease, border-color 140ms ease;
+      transition:
+        color 140ms ease,
+        border-color 140ms ease;
     }
   }
 

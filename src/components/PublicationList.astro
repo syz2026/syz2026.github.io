@@ -14,7 +14,7 @@ const { items } = Astro.props;
       <li class="entry">
         <h3 class="entry-title">
           {pub.href ? (
-            <a href={pub.href} rel="noopener">
+            <a href={pub.href} rel="noopener noreferrer">
               {pub.title}
             </a>
           ) : (
@@ -29,7 +29,7 @@ const { items } = Astro.props;
           </span>
           <span>{pub.year}</span>
           {pub.secondary && (
-            <a href={pub.secondary.href} rel="noopener">
+            <a href={pub.secondary.href} rel="noopener noreferrer">
               {pub.secondary.label}
             </a>
           )}

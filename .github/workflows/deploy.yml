@@ -1,52 +1,81 @@
-name: Deploy to GitHub Pages
+name: Verify and deploy
 
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
+# Read-only by default. The deploy job widens this for itself alone.
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
-# Let a running deploy finish rather than cancelling it midway.
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 env:
   ASTRO_TELEMETRY_DISABLED: 1
 
 jobs:
-  build:
+  verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      # Actions are pinned to commit SHAs rather than tags, because a tag can be
+      # moved to point at different code after review. The comment records which
+      # release each SHA corresponded to when it was pinned.
+      - name: Check out
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
-          node-version: 22
+          # No push happens from CI, so the token has no reason to persist in
+          # the checkout's git config.
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: .nvmrc
           cache: npm
 
-      - run: npm ci
+      - name: Install
+        run: npm ci
 
-      # Runs before the build so a malformed content entry fails here, with a
-      # message naming the field, rather than shipping.
-      - run: npm run check
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
 
-      - run: npm run build
+      - name: Check formatting
+        run: npm run format:check
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Type check
+        run: npm run check
+
+      - name: Unit tests
+        run: npm test
+
+      # The build runs the output validator, which fails on a broken internal
+      # link, a missing audio or score file, a page without metadata, or any
+      # script or inline style reaching the output.
+      - name: Build and validate output
+        run: npm run build
+
+      - name: Upload Pages artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
           path: dist
 
   deploy:
-    needs: build
+    needs: verify
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

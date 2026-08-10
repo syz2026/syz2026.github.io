@@ -10,9 +10,10 @@ interface Props {
 const { entry } = Astro.props;
 const { title, status, year, question, summary, tags, links } = entry.data;
 
-const linkEntries = (
-  links ? Object.entries(links) : []
-) as [keyof typeof pages.research.linkLabels, string][];
+const linkEntries = (links ? Object.entries(links) : []) as [
+  keyof typeof pages.research.linkLabels,
+  string,
+][];
 ---
 
 <li class="entry">
@@ -31,7 +32,7 @@ const linkEntries = (
     {tags.map((tag) => <span>{tag}</span>)}
     {
       linkEntries.map(([key, href]) => (
-        <a href={href} rel="noopener">
+        <a href={href} rel="noopener noreferrer">
           {pages.research.linkLabels[key]}
         </a>
       ))

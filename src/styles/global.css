@@ -21,10 +21,10 @@
   --accent-strong: #5f222d;
   --accent-soft: #eee2de;
 
-  --font-serif: Charter, 'Bitstream Charter', 'Iowan Old Style',
-    'Palatino Linotype', Palatino, Georgia, serif;
-  --font-sans: Optima, Candara, 'Segoe UI', 'Noto Sans', 'Helvetica Neue',
-    Helvetica, Arial, sans-serif;
+  --font-serif:
+    Charter, 'Bitstream Charter', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-sans:
+    Optima, Candara, 'Segoe UI', 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   --site-max: 40rem;
   --prose-max: 36rem;
@@ -129,7 +129,9 @@ a:hover {
 
 @media (prefers-reduced-motion: no-preference) {
   a {
-    transition: color 140ms ease, text-decoration-color 140ms ease;
+    transition:
+      color 140ms ease,
+      text-decoration-color 140ms ease;
   }
 }
 

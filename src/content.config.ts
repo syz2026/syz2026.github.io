@@ -45,9 +45,7 @@ const music = defineCollection({
     instrumentation: z.string(),
     duration: z.string().optional(),
     blurb: z.string(),
-    movements: z
-      .array(z.object({ title: z.string(), duration: z.string().optional() }))
-      .optional(),
+    movements: z.array(z.object({ title: z.string(), duration: z.string().optional() })).optional(),
     // Paths relative to `public/`, e.g. '/media/audio/piece.mp3'.
     audio: z.string().optional(),
     score: z.string().optional(),

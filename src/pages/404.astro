@@ -3,11 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { pages } from '../data/pages';
 ---
 
-<BaseLayout
-  title={pages.notFound.title}
-  description={pages.notFound.description}
-  noindex
->
+<BaseLayout title={pages.notFound.title} description={pages.notFound.description} noindex>
   <h1 class="page-title">{pages.notFound.title}</h1>
   <p class="body">{pages.notFound.body}</p>
   <p class="home-row">

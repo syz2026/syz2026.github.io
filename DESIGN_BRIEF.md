@@ -49,7 +49,15 @@ Import these. Do not restructure them, and do not inline content in templates.
 ### Static data
 
 ```ts
-import { profile, education, research, experience, activities, awards, skills } from '../data/profile';
+import {
+  profile,
+  education,
+  research,
+  experience,
+  activities,
+  awards,
+  skills,
+} from '../data/profile';
 import { publications } from '../data/publications';
 import { nav, pages } from '../data/pages';
 ```
@@ -62,8 +70,9 @@ import { nav, pages } from '../data/pages';
   `{ organization, role, location, start, end, bullets }`.
 - `awards` is an array of `{ title, year }`. `skills` is an array of
   `{ group, items }`.
-- `publications` is an array of `{ authors, year, title, venue, detail?, href?, secondary? }`
-  where `secondary` is `{ label, href }`.
+- `publications` is an array of
+  `{ authors, year, title, venue, detail?, href?, secondary? }` where
+  `secondary` is `{ label, href }`.
 - `pages` holds every page's `title`, `description`, and the intro and
   empty-state strings. All user-facing copy lives here. **Write no prose of your
   own into templates.** If a string you need is missing, add it to
@@ -72,7 +81,12 @@ import { nav, pages } from '../data/pages';
 ### Collections
 
 ```ts
-import { getResearch, getMusic, getSoftware, RESEARCH_STATUS_LABEL } from '../lib/collections';
+import {
+  getResearch,
+  getMusic,
+  getSoftware,
+  RESEARCH_STATUS_LABEL,
+} from '../lib/collections';
 ```
 
 Each returns a sorted, draft-filtered array of Astro collection entries. Entry
@@ -84,6 +98,7 @@ Render an entry body with:
 import { render } from 'astro:content';
 const { Content } = await render(entry);
 ---
+
 <Content />
 ```
 
@@ -105,15 +120,15 @@ because entries will arrive gradually.
 
 ## Pages to build
 
-| Route | File | Contents |
-|---|---|---|
-| `/` | `src/pages/index.astro` | Name, tagline, headshot, `profile.bio` paragraphs, `profile.links` |
-| `/research` | `src/pages/research.astro` | `pages.research.intro`, then Publications (populated), Independent projects (empty), Software (empty) |
-| `/music` | `src/pages/music.astro` | `pages.music.intro`, then the works list (empty) |
-| `/cv` | `src/pages/cv.astro` | Education, Experience, Research, Publications, Activities, Awards, Skills, and a link to `profile.resume` |
-| `/research/[id]` | `src/pages/research/[...id].astro` | One research entry with its rendered body |
-| `/music/[id]` | `src/pages/music/[...id].astro` | One work with audio, score link, movements, and body |
-| 404 | `src/pages/404.astro` | Simple, in keeping |
+| Route            | File                               | Contents                                                                                                  |
+| ---------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `/`              | `src/pages/index.astro`            | Name, tagline, headshot, `profile.bio` paragraphs, `profile.links`                                        |
+| `/research`      | `src/pages/research.astro`         | `pages.research.intro`, then Publications (populated), Independent projects (empty), Software (empty)     |
+| `/music`         | `src/pages/music.astro`            | `pages.music.intro`, then the works list (empty)                                                          |
+| `/cv`            | `src/pages/cv.astro`               | Education, Experience, Research, Publications, Activities, Awards, Skills, and a link to `profile.resume` |
+| `/research/[id]` | `src/pages/research/[...id].astro` | One research entry with its rendered body                                                                 |
+| `/music/[id]`    | `src/pages/music/[...id].astro`    | One work with audio, score link, movements, and body                                                      |
+| 404              | `src/pages/404.astro`              | Simple, in keeping                                                                                        |
 
 Dynamic routes need `getStaticPaths`. With empty collections they generate no
 pages, which is correct and must not error the build.
@@ -131,17 +146,17 @@ list. An empty-state component. An audio player.
 
 Entries may set `audio` to an MP3 path, and may omit it. Build on native
 `<audio controls>` so it works without JavaScript. You may style it or wrap it
-in a light custom UI, but if you build custom controls they must be real buttons,
-keyboard operable, with accessible labels, and the native element must remain the
-fallback. Do not autoplay. Do not preload audio; set `preload="none"` so a page
-of works does not pull megabytes on load.
+in a light custom UI, but if you build custom controls they must be real
+buttons, keyboard operable, with accessible labels, and the native element must
+remain the fallback. Do not autoplay. Do not preload audio; set `preload="none"`
+so a page of works does not pull megabytes on load.
 
 ## SEO and metadata
 
 Every page sets `<title>` and `<meta name="description">` from `pages`. Include
 Open Graph tags, `<html lang="en">`, and a canonical URL built from Astro's
-configured `site`. Add `src/pages/robots.txt.ts` and a sitemap only if you can do
-it without a new dependency.
+configured `site`. Add `src/pages/robots.txt.ts` and a sitemap only if you can
+do it without a new dependency.
 
 ## Definition of done
 

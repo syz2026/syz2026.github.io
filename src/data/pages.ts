@@ -13,8 +13,7 @@ export const pages = {
   },
   research: {
     title: 'Research',
-    description:
-      'Peer-reviewed publications and independent research projects by Stephen Zhang.',
+    description: 'Peer-reviewed publications and independent research projects by Stephen Zhang.',
     intro:
       'Peer-reviewed publications come first, and independent projects follow. Every independent entry carries its real status, because most of that work is complete but unsubmitted and listing it beside a journal paper without that label would probably overstate it.',
     publicationsHeading: 'Publications',
@@ -33,12 +32,10 @@ export const pages = {
   },
   music: {
     title: 'Music',
-    description:
-      'Original compositions by Stephen Zhang, with scores and recordings.',
+    description: 'Original compositions by Stephen Zhang, with scores and recordings.',
     intro:
       'I compose for orchestra and for smaller ensembles, and I play trumpet. Scores and recordings go here as pieces are finished, and the recordings are synthesized from the notation rather than performed.',
-    empty:
-      'No works are listed yet. I am choosing which pieces are ready to publish.',
+    empty: 'No works are listed yet. I am choosing which pieces are ready to publish.',
     worksHeading: 'Works',
     inProgressLabel: 'In progress',
     recordingLabel: 'Recording',
@@ -49,8 +46,7 @@ export const pages = {
   },
   cv: {
     title: 'Curriculum Vitae',
-    description:
-      'Education, experience, publications, awards, and skills for Stephen Zhang.',
+    description: 'Education, experience, publications, awards, and skills for Stephen Zhang.',
     resumeLabel: 'Resume (PDF)',
     courseworkLabel: 'Selected coursework',
     sections: {

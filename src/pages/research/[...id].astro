@@ -21,9 +21,10 @@ const { entry } = Astro.props as Props;
 const { title, status, year, question, summary, tags, links } = entry.data;
 const { Content } = await render(entry);
 
-const linkEntries = (
-  links ? Object.entries(links) : []
-) as [keyof typeof pages.research.linkLabels, string][];
+const linkEntries = (links ? Object.entries(links) : []) as [
+  keyof typeof pages.research.linkLabels,
+  string,
+][];
 ---
 
 <BaseLayout title={title} description={summary} ogType="article">
@@ -50,7 +51,7 @@ const linkEntries = (
       linkEntries.length > 0 && (
         <p class="meta links-row">
           {linkEntries.map(([key, href]) => (
-            <a href={href} rel="noopener">
+            <a href={href} rel="noopener noreferrer">
               {pages.research.linkLabels[key]}
             </a>
           ))}
