@@ -87,14 +87,16 @@ import { pages } from '../data/pages';
     margin-top: 0.25rem;
   }
 
-  /* The drop cap opens the program note. */
+  /* A raised initial rather than a dropped one. A drop cap has to cut a
+     rectangular column out of the text, which a narrow glyph cannot do, and
+     the bio happens to open on "I". Setting the initial on the baseline works
+     for any letter, so the opening sentence can be rewritten freely. */
   .bio p:first-of-type::first-letter {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 3.05em;
-    line-height: 0.82;
-    float: left;
-    padding: 0.1em 0.14em 0 0;
+    font-size: 2.15em;
+    line-height: 1;
+    padding-right: 0.04em;
     color: var(--accent);
   }
 

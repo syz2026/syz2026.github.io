@@ -260,13 +260,15 @@ main {
   }
 }
 
+/* Transform only, deliberately. Animating opacity from 0 on a scroll timeline
+   risks leaving a heading invisible whenever the timeline is inactive, which
+   happens on a page too short to scroll and when printing. The worst case here
+   is a heading sitting 7px low, which nobody will notice. */
 @keyframes section-in {
   from {
-    opacity: 0;
     transform: translateY(7px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }
@@ -483,8 +485,9 @@ main {
     display: none;
   }
 
-  /* Scroll-driven animation could leave headings at their start state in
-     a print snapshot; force the final state. */
+  /* A print snapshot can catch the scroll-driven animation at its start
+     state, which would offset the heading. Harmless now that the keyframes
+     move nothing but transform, and still not what should go on paper. */
   .section > h2 {
     animation: none;
   }
