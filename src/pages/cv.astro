@@ -76,7 +76,7 @@ import { pages } from '../data/pages';
 
   <section class="section" aria-labelledby="cv-skills">
     <h2 id="cv-skills">{pages.cv.sections.skills}</h2>
-    <div class="entry skills">
+    <div class="entry">
       {
         skills.map((skill) => (
           <p class="skill-row">
@@ -90,11 +90,6 @@ import { pages } from '../data/pages';
 </BaseLayout>
 
 <style>
-  .page-title {
-    font-size: clamp(1.7rem, 1.4rem + 1.8vw, 2.1rem);
-    letter-spacing: -0.015em;
-  }
-
   .cv-head {
     display: flex;
     flex-wrap: wrap;
@@ -127,11 +122,11 @@ import { pages } from '../data/pages';
   }
 
   .first-section {
-    margin-top: 2.5rem;
+    margin-top: 3rem;
   }
 
   .section > h2 {
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.5rem;
   }
 
   .degree {

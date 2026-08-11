@@ -1,4 +1,10 @@
 ---
+/**
+ * An empty section is notated as a rest: a full-width measure of staff
+ * lines holding a single whole rest, with the copy set below like a stage
+ * direction. Silence, marked deliberately, rather than missing content.
+ * The measure is pure CSS so the lines run edge to edge undistorted.
+ */
 interface Props {
   text: string;
 }
@@ -7,5 +13,73 @@ const { text } = Astro.props;
 ---
 
 <div class="empty-state">
+  <div class="measure" aria-hidden="true">
+    <span class="rest"></span>
+  </div>
   <p>{text}</p>
 </div>
+
+<style>
+  .empty-state {
+    border-top: 3px double var(--line-strong);
+    padding: 2.5rem 0 2.75rem;
+  }
+
+  /* Five staff lines, drawn as backgrounds so they span the full measure. */
+  .measure {
+    position: relative;
+    height: 4rem;
+    background-image:
+      linear-gradient(var(--line-strong), var(--line-strong)),
+      linear-gradient(var(--line-strong), var(--line-strong)),
+      linear-gradient(var(--line-strong), var(--line-strong)),
+      linear-gradient(var(--line-strong), var(--line-strong)),
+      linear-gradient(var(--line-strong), var(--line-strong));
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position:
+      0 0.5rem,
+      0 1.25rem,
+      0 2rem,
+      0 2.75rem,
+      0 3.5rem;
+  }
+
+  /* Barlines bounding the measure. */
+  .measure::before,
+  .measure::after {
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    width: 1px;
+    height: 3.0625rem;
+    background: var(--line-strong);
+  }
+
+  .measure::before {
+    left: 0;
+  }
+
+  .measure::after {
+    right: 0;
+  }
+
+  /* A whole rest: the filled block hangs below the second line. */
+  .rest {
+    position: absolute;
+    top: 1.25rem;
+    left: 50%;
+    width: 0.75rem;
+    height: 0.42rem;
+    margin-left: -0.375rem;
+    background: var(--ink);
+  }
+
+  .empty-state p {
+    max-width: var(--prose-max);
+    margin: 1.75rem auto 0;
+    text-align: center;
+    font-style: italic;
+    color: var(--ink-2);
+  }
+</style>

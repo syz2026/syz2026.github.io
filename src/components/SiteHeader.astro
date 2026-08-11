@@ -9,7 +9,15 @@ const isCurrent = (href: string) => (href === '/' ? pathname === '/' : pathname.
 <header class="site-header">
   <div class="header-inner">
     <a class="site-name" href="/" aria-label={`${profile.name}, home`}>
-      {profile.name}
+      <svg class="mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <line x1="2" y1="7" x2="22" y2="7"></line>
+        <line x1="2" y1="10.5" x2="22" y2="10.5"></line>
+        <line x1="2" y1="14" x2="22" y2="14"></line>
+        <line x1="2" y1="17.5" x2="22" y2="17.5"></line>
+        <line class="mark-stem" x1="16.4" y1="14" x2="16.4" y2="2.5"></line>
+        <ellipse class="mark-head" cx="12.6" cy="14" rx="4.4" ry="3.3"></ellipse>
+      </svg>
+      <span>{profile.name}</span>
     </a>
     <nav class="site-nav" aria-label="Primary">
       <ul>
@@ -44,16 +52,42 @@ const isCurrent = (href: string) => (href === '/' ? pathname === '/' : pathname.
   }
 
   .site-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
     font-family: var(--font-sans);
-    font-size: 1.06rem;
+    font-size: 1.02rem;
     font-weight: 600;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.06em;
     color: var(--ink);
     text-decoration: none;
   }
 
   .site-name:hover {
     color: var(--accent);
+  }
+
+  .mark {
+    width: 1.4rem;
+    height: 1.4rem;
+    flex: none;
+  }
+
+  .mark line {
+    stroke: var(--line-strong);
+    stroke-width: 1;
+  }
+
+  .mark .mark-stem {
+    stroke: var(--accent);
+    stroke-width: 1.6;
+  }
+
+  .mark-head {
+    fill: var(--accent);
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: rotate(-16deg);
   }
 
   .site-nav ul {
@@ -70,8 +104,8 @@ const isCurrent = (href: string) => (href === '/' ? pathname === '/' : pathname.
     font-size: 0.9rem;
     color: var(--ink-2);
     text-decoration: none;
-    padding-bottom: 0.15rem;
-    border-bottom: 2px solid transparent;
+    padding-bottom: 0.18rem;
+    border-bottom: 3px double transparent;
   }
 
   .site-nav a:hover {
@@ -88,6 +122,13 @@ const isCurrent = (href: string) => (href === '/' ? pathname === '/' : pathname.
       transition:
         color 140ms ease,
         border-bottom-color 140ms ease;
+    }
+
+    .mark-head,
+    .mark-stem {
+      transition:
+        fill 140ms ease,
+        stroke 140ms ease;
     }
   }
 </style>

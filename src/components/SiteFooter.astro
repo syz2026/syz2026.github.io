@@ -6,11 +6,18 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="footer-inner">
+    <svg class="end-mark" viewBox="0 0 36 18" aria-hidden="true" focusable="false">
+      <line x1="14" y1="1" x2="14" y2="17"></line>
+      <rect x="19" y="1" width="3.4" height="16"></rect>
+    </svg>
+    {
+      /* Spacing comes from CSS rather than from markup whitespace, which the
+        template collapses across line breaks between expressions. */
+    }
     <p class="footer-note">
-      &copy; {year}
-      {profile.name}
-      <span aria-hidden="true">·</span>
-      {profile.location}
+      <span>&copy; {year} {profile.name}</span>
+      <span class="sep" aria-hidden="true">·</span>
+      <span>{profile.location}</span>
     </p>
     <ul class="footer-links">
       {
@@ -32,12 +39,28 @@ const year = new Date().getFullYear();
   .footer-inner {
     max-width: var(--site-max);
     margin: 0 auto;
-    padding: 1.5rem var(--gutter) 2.25rem;
+    padding: 2.25rem var(--gutter) 2.75rem;
     display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.5rem 1.5rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    text-align: center;
+  }
+
+  /* The final barline: every page of the site ends on a light-heavy bar,
+     the way a movement ends. */
+  .end-mark {
+    width: 1.55rem;
+    height: auto;
+  }
+
+  .end-mark line {
+    stroke: var(--ink-2);
+    stroke-width: 1;
+  }
+
+  .end-mark rect {
+    fill: var(--ink);
   }
 
   .footer-note {
@@ -46,10 +69,15 @@ const year = new Date().getFullYear();
     color: var(--ink-2);
   }
 
+  .sep {
+    margin: 0 0.45em;
+  }
+
   .footer-links {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0.35rem 1.2rem;
     margin: 0;
     padding: 0;

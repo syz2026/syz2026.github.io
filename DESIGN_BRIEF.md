@@ -12,25 +12,70 @@ coevolution in the Feldman Lab, runs preregistered experiments on language
 models, and composes for orchestra. The site's readers are research groups,
 internship recruiters, and people who want to hear the music.
 
-It should read as a considered personal site by someone precise: typographic,
-quiet, and unhurried. It is not a startup landing page. No hero gradients, no
-feature grids, no calls to action, no stock illustration, no animated counters.
-Whitespace and type hierarchy should do the work. Beyond that the aesthetic is
-genuinely yours to choose, and you should make real decisions rather than
-defaulting to a generic template.
+The site should be memorable. Someone who visits once ought to be able to
+picture it a week later, and it should be obvious within a second that it
+belongs to this person rather than to a template. An earlier version of this
+brief asked for restraint above all, and the result was correct but forgettable,
+so the direction has changed: aim for a design with a real point of view, and
+take the risk that comes with that.
+
+What it must not become is a generic startup landing page. No stock
+illustration, no feature-card grids, no calls to action, no animated statistics,
+no purple-to-blue gradient behind a centered headline. Those read as templated
+precisely because they carry no information about the person. Distinctiveness
+here has to come from Stephen's own material rather than from decoration
+borrowed from somewhere else.
+
+The obvious well to draw from is that he is simultaneously a mathematician and a
+performing musician, and both disciplines are about structure unfolding over
+time. Staff lines, notation, the harmonic series, waveforms, lattices, and
+plotted curves are all fair game as structural or ornamental motifs. The current
+design already rules its rows with hairlines, which is one short step from a
+stave. That is one idea rather than an instruction. Have your own, and commit to
+it.
+
+Bear in mind that the reader is often a research group or a recruiter, so
+legibility and credibility must survive whatever you do. Ambitious and unserious
+are different things.
 
 ## Hard technical constraints
 
+These are enforced by the build, which fails rather than warns, so working
+around one is not an option.
+
 - **Astro 7.2.0, static output.** No React, Vue, Svelte, or any UI framework.
   Components are `.astro` files.
-- **No network at build or runtime.** The build sandbox has no general internet
-  access, so no Google Fonts, no CDN stylesheets, no remote images, and no new
-  npm packages. Use a system font stack. `astro` and `sharp` are the only
-  dependencies and that must stay true.
+- **Zero JavaScript.** The Content Security Policy sets `script-src 'none'`, so
+  a script tag does not merely fail review, it fails the build and would be
+  blocked by the browser anyway. Everything is CSS, HTML, and SVG.
+- **No network at build or runtime.** No Google Fonts, no CDN stylesheets, no
+  remote images, no new npm packages. `astro` is now the only runtime dependency
+  and that must stay true. Fonts come from a system stack.
 - **Plain CSS.** Global tokens in `src/styles/global.css`, everything else in
-  component `<style>` blocks. No Tailwind, no CSS-in-JS.
-- **Progressive enhancement.** The site must be fully readable and navigable
-  with JavaScript disabled. Any JS is vanilla and additive.
+  component `<style>` blocks. No Tailwind, no CSS-in-JS. Astro emits these as
+  external files, which the CSP requires, so never hand-write a `<style>` tag
+  into markup.
+
+### What you can use to be expressive
+
+The constraints above rule out the usual tricks, and they leave more than they
+take. All of the following are available and none of them costs a byte of
+JavaScript.
+
+- Inline SVG, generated in the template or hand-written. This is the widest door
+  by far, since anything drawable is drawable here, including patterns,
+  gradients, filters, masks, and `<animate>`.
+- CSS animation and transitions, plus scroll-driven animation through
+  `animation-timeline: scroll()` and `view()`.
+- CSS-only interaction through `:hover`, `:focus-within`, `:target`, and
+  `<details>`.
+- Gradients, blend modes, `clip-path`, custom properties, container queries, and
+  asymmetric or overlapping grid layouts.
+- `@font-face` against locally installed fonts, as long as there is a system
+  fallback for machines that lack them.
+
+Anything that moves must be wrapped so that `prefers-reduced-motion: reduce`
+turns it off, and the page must still make sense once it is off.
 
 ## Accessibility and responsiveness, both required
 
@@ -144,12 +189,11 @@ list. An empty-state component. An audio player.
 
 ### The audio player
 
-Entries may set `audio` to an MP3 path, and may omit it. Build on native
-`<audio controls>` so it works without JavaScript. You may style it or wrap it
-in a light custom UI, but if you build custom controls they must be real
-buttons, keyboard operable, with accessible labels, and the native element must
-remain the fallback. Do not autoplay. Do not preload audio; set `preload="none"`
-so a page of works does not pull megabytes on load.
+Entries may set `audio` to an MP3 path, and may omit it. Use native
+`<audio controls>`, which is the only option now that scripting is forbidden.
+Style it as far as CSS allows and dress the surrounding figure however you like.
+Do not autoplay. Do not preload audio; set `preload="none"` so a page of works
+does not pull megabytes on load.
 
 ## SEO and metadata
 
@@ -160,7 +204,13 @@ do it without a new dependency.
 
 ## Definition of done
 
-`npm run build` completes with no errors, and `npx astro check` reports no type
-errors. Every route renders. The site is legible at 320px, keyboard navigable,
-and correct in both colour schemes. Report anything you could not do rather than
-working around it silently.
+`npm run verify` exits 0. That single command runs the formatter check, the type
+check, the unit tests, and the build, and the build runs an output validator
+that fails on a broken link, a missing asset, a page without metadata or without
+exactly one `<h1>`, an image lacking alt text or dimensions, and any `<script>`
+or inline `<style>`.
+
+Beyond the automated gates, every route must render, the site must be legible at
+320px, fully keyboard navigable, and correct in both colour schemes, and every
+text and background pair must clear WCAG AA. Report anything you could not do
+rather than working around it silently.

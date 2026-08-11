@@ -1,0 +1,241 @@
+---
+/**
+ * The site's theme statement: the harmonic series, partials 1–8, drawn as
+ * stems rising from a five-line staff. It is simultaneously a figure from
+ * acoustics (a brass instrument's spectrum, amplitudes following 1/n), a
+ * plotted function, and a phrase of notation, which is the one object
+ * where Stephen's mathematics and his music coincide.
+ *
+ * Decorative: the same idea is carried in the copy, so the figure is
+ * hidden from assistive technology. Hovering a partial reveals the ratio
+ * of the interval it forms with the partial before it.
+ */
+const BASE_X = 84;
+const STEP = 78;
+const BASE_Y = 144;
+const MAX_HEIGHT = 118;
+
+const ratios = ['1:1', '2:1', '3:2', '4:3', '5:4', '6:5', '7:6', '8:7'];
+
+const partials = ratios.map((ratio, i) => {
+  const n = i + 1;
+  const x = BASE_X + i * STEP;
+  const top = +(BASE_Y - MAX_HEIGHT / n).toFixed(2);
+  return { n, x, top, ratio };
+});
+
+const staffLines = [96, 108, 120, 132, 144];
+---
+
+<svg class="harmonics" viewBox="0 0 720 200" aria-hidden="true" focusable="false">
+  <g>
+    {staffLines.map((y) => <line class="hs-staff" x1="28" x2="692" y1={y} y2={y} pathLength="1" />)}
+    <line class="hs-bar" x1="28" y1="96" x2="28" y2="144" pathLength="1"></line>
+    <line class="hs-bar" x1="686" y1="96" x2="686" y2="144" pathLength="1"></line>
+    <rect class="hs-bar-final" x="689.5" y="96" width="3.5" height="48"></rect>
+  </g>
+  {
+    partials.map((p) => (
+      <g class={`partial p${p.n}`}>
+        <line class="hs-stem" x1={p.x} y1={BASE_Y} x2={p.x} y2={p.top} pathLength="1" />
+        <ellipse
+          class="hs-head"
+          cx={p.x}
+          cy={p.top}
+          rx={p.n === 1 ? 8.5 : 7}
+          ry={p.n === 1 ? 6.4 : 5.2}
+        />
+        <text class="hs-ratio" x={p.x} y={p.top - 14} text-anchor="middle">
+          {p.ratio}
+        </text>
+        <text class="hs-num" x={p.x} y="172" text-anchor="middle">
+          {p.n}
+        </text>
+      </g>
+    ))
+  }
+</svg>
+
+<style>
+  .harmonics {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 2.4rem 0 2.6rem;
+  }
+
+  .hs-staff {
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    stroke-dasharray: 1;
+  }
+
+  .hs-bar {
+    stroke: var(--line-strong);
+    stroke-width: 1;
+  }
+
+  .hs-bar-final {
+    fill: var(--ink);
+  }
+
+  .hs-stem {
+    stroke: var(--ink-2);
+    stroke-width: 1.5;
+    stroke-dasharray: 1;
+  }
+
+  .hs-head {
+    fill: var(--accent);
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: rotate(-16deg);
+  }
+
+  .hs-num {
+    fill: var(--ink-2);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  .hs-ratio {
+    fill: var(--accent-strong);
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    letter-spacing: 0.05em;
+    opacity: 0;
+  }
+
+  .partial {
+    cursor: default;
+  }
+
+  .partial:hover .hs-head {
+    fill: var(--accent-strong);
+  }
+
+  .partial:hover .hs-ratio {
+    opacity: 1;
+  }
+
+  /* The staff draws across, then the partials rise one by one, like the
+     series being sounded. Under reduced motion none of this runs and the
+     figure renders complete. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hs-ratio {
+      transition: opacity 160ms ease;
+    }
+
+    .hs-head {
+      transition: fill 140ms ease;
+    }
+
+    .hs-staff,
+    .hs-bar {
+      animation: draw 520ms ease-out both;
+    }
+
+    .hs-bar-final {
+      animation: fade-in 520ms ease-out both;
+    }
+
+    .hs-stem {
+      animation: draw 340ms ease-out both;
+    }
+
+    .hs-head {
+      animation: head-in 380ms cubic-bezier(0.2, 0.7, 0.3, 1.2) both;
+    }
+
+    .hs-num {
+      animation: fade-in 380ms ease-out both;
+    }
+
+    .p1 .hs-stem {
+      animation-delay: 420ms;
+    }
+    .p1 .hs-head,
+    .p1 .hs-num {
+      animation-delay: 680ms;
+    }
+    .p2 .hs-stem {
+      animation-delay: 510ms;
+    }
+    .p2 .hs-head,
+    .p2 .hs-num {
+      animation-delay: 770ms;
+    }
+    .p3 .hs-stem {
+      animation-delay: 600ms;
+    }
+    .p3 .hs-head,
+    .p3 .hs-num {
+      animation-delay: 860ms;
+    }
+    .p4 .hs-stem {
+      animation-delay: 690ms;
+    }
+    .p4 .hs-head,
+    .p4 .hs-num {
+      animation-delay: 950ms;
+    }
+    .p5 .hs-stem {
+      animation-delay: 780ms;
+    }
+    .p5 .hs-head,
+    .p5 .hs-num {
+      animation-delay: 1040ms;
+    }
+    .p6 .hs-stem {
+      animation-delay: 870ms;
+    }
+    .p6 .hs-head,
+    .p6 .hs-num {
+      animation-delay: 1130ms;
+    }
+    .p7 .hs-stem {
+      animation-delay: 960ms;
+    }
+    .p7 .hs-head,
+    .p7 .hs-num {
+      animation-delay: 1220ms;
+    }
+    .p8 .hs-stem {
+      animation-delay: 1050ms;
+    }
+    .p8 .hs-head,
+    .p8 .hs-num {
+      animation-delay: 1310ms;
+    }
+  }
+
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes head-in {
+    from {
+      opacity: 0;
+      transform: rotate(-16deg) scale(0.3);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(-16deg) scale(1);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>

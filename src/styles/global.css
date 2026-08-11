@@ -1,32 +1,40 @@
 /* ==========================================================================
    Design tokens
-   Ink-on-paper editorial scheme. One accent, a quiet wine red, used only
-   for links, the current-page marker, focus rings, and small markers of
-   intent. Light and dark schemes both meet WCAG AA for text contrast.
+
+   The site is set like a printed score. Light scheme is manuscript paper:
+   warm cream, near-black ink, and one brass accent (the trumpet). Dark
+   scheme is the engraved cover: deep ink-navy with a brighter brass. All
+   text/background pairs meet WCAG AA in both schemes:
+
+   light: ink 14.94 · ink-2 7.37 · ink-3 5.10 · accent 5.84 · accent-strong
+   8.61 · paper on accent 5.84 · ink on accent-soft 13.32 (on --paper)
+   dark:  ink 14.03 · ink-2 8.37 · ink-3 5.22 · accent 8.28 · accent-strong
+   10.92 · paper on accent 8.28 · ink on accent-soft 11.50 (on --paper)
    ========================================================================== */
 
 :root {
   color-scheme: light;
 
-  --paper: #f7f5ef;
-  --paper-raised: #fffdf9;
-  --ink: #28251f;
-  --ink-2: #5d584d;
-  /* 4.71:1 on --paper, so this stays usable for body-size text, not only for
-     the large-text threshold. */
-  --ink-3: #736d61;
-  --line: #ddd8cb;
-  --line-strong: #c8c2b2;
-  --accent: #7a2e3a;
-  --accent-strong: #5f222d;
-  --accent-soft: #eee2de;
+  --paper: #f9f5e9;
+  --paper-raised: #fefbf3;
+  --ink: #232016;
+  --ink-2: #56503f;
+  --ink-3: #6e6855;
+  --line: #ddd6c1;
+  --line-strong: #c5bca0;
+  --accent: #7a5a12;
+  --accent-strong: #5c4209;
+  --accent-soft: #f0e8d2;
 
+  /* Engraved display face for titles, Charter for reading, Optima for
+     labels. Each stack degrades to common system faces. */
+  --font-display: 'Bodoni 72', Didot, 'Bodoni MT', 'Times New Roman', Georgia, serif;
   --font-serif:
     Charter, 'Bitstream Charter', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
   --font-sans:
     Optima, Candara, 'Segoe UI', 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-  --site-max: 40rem;
+  --site-max: 42rem;
   --prose-max: 36rem;
   --gutter: clamp(1.25rem, 5vw, 2rem);
 
@@ -37,16 +45,16 @@
   :root {
     color-scheme: dark;
 
-    --paper: #1a1914;
-    --paper-raised: #232119;
-    --ink: #e8e4d8;
-    --ink-2: #b3ac9c;
-    --ink-3: #8d8778;
-    --line: #3a372d;
-    --line-strong: #4d493c;
-    --accent: #d89aa4;
-    --accent-strong: #e9bcc3;
-    --accent-soft: #352a28;
+    --paper: #111927;
+    --paper-raised: #18222f;
+    --ink: #ede5d1;
+    --ink-2: #bcb29a;
+    --ink-3: #958b73;
+    --line: #2b3a4f;
+    --line-strong: #3e5069;
+    --accent: #d9ab4a;
+    --accent-strong: #f0c670;
+    --accent-soft: #2c2a1c;
   }
 }
 
@@ -128,6 +136,10 @@ a:hover {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
   a {
     transition:
       color 140ms ease,
@@ -169,23 +181,120 @@ a:hover {
   top: 0.75rem;
   color: var(--paper);
   outline-color: var(--ink);
+  /* The halo keeps the ring visible where it crosses the brass background. */
+  box-shadow: 0 0 0 4px var(--paper);
+}
+
+/* ==========================================================================
+   Page titles and section headings
+
+   The page title is set in the engraved display face. Section headings are
+   numbered like movements (CSS counters, upper-roman) and ruled off to the
+   right, the way movement titles are set in a printed score.
+   ========================================================================== */
+
+.page-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 1.55rem + 2.6vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: 0.005em;
+}
+
+.lede {
+  margin-top: 1.1rem;
+  max-width: var(--prose-max);
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+main {
+  counter-reset: section;
+}
+
+.section {
+  counter-increment: section;
+  margin-top: 3.5rem;
+}
+
+.section > h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.section > h2::before {
+  content: counter(section, upper-roman) '.';
+  min-width: 2.4rem;
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.section > h2::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line-strong);
+  transform: translateY(-0.28em);
+}
+
+/* Sections rise faintly as they enter, where scroll-driven animation is
+   supported. Without support or under reduced motion they render static. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .section > h2 {
+      animation-name: section-in;
+      animation-duration: 1s; /* nominal duration; the view() timeline drives progress */
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+}
+
+@keyframes section-in {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ==========================================================================
    Shared primitives
 
    The site renders almost everything as ruled rows rather than boxed
-   cards: the "entry" pattern (a list item with a header row, meta line,
+   cards. In this design those rows are measures: a list opens on a double
+   bar and closes on a final barline (light-heavy), the way a movement
+   ends. The "entry" pattern (a list item with a header row, meta line,
    and optional summary) is shared by publications, research, software,
-   works, positions, and awards. It lives here because five components
-   use it; component- and page-specific styles stay in their own files.
+   works, positions, and awards.
    ========================================================================== */
 
 .entries {
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 1px solid var(--line-strong);
+  border-top: 3px double var(--line-strong);
+}
+
+/* The final barline closing every list. */
+.entries::after {
+  content: '';
+  display: block;
+  margin-top: 4px;
+  border-top: 3px solid var(--ink);
 }
 
 .entry {
@@ -203,7 +312,7 @@ a:hover {
 
 .entry-title {
   font-family: var(--font-serif);
-  font-size: 1.12rem;
+  font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: 0;
 }
@@ -256,7 +365,7 @@ a:hover {
 
 /* Status chips. Wording always comes from RESEARCH_STATUS_LABEL; the
    visual weight mirrors the semantics: only peer-reviewed work gets the
-   solid accent treatment, so unsubmitted work can never read as
+   solid brass treatment, so unsubmitted work can never read as
    published. */
 .status {
   display: inline-block;
@@ -276,6 +385,11 @@ a:hover {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--paper);
+}
+
+.status[data-status='complete-unsubmitted'] {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .status[data-status='in-progress'] {
@@ -299,38 +413,6 @@ a:hover {
   color: var(--ink-2);
 }
 
-/* The empty-state note: a short accent rule and a single italic line, so
-   an empty section reads as a deliberate note rather than missing
-   content. */
-.empty-state {
-  padding: 2.25rem 0 2.5rem;
-  border-top: 1px solid var(--line-strong);
-}
-
-.empty-state::before {
-  content: '';
-  display: block;
-  width: 2rem;
-  height: 2px;
-  background: var(--accent);
-  margin-bottom: 1.1rem;
-}
-
-.empty-state p {
-  max-width: var(--prose-max);
-  font-style: italic;
-  color: var(--ink-2);
-}
-
-/* Section headings on multi-section pages. */
-.section {
-  margin-top: 3.25rem;
-}
-
-.section > h2 {
-  font-size: 1.28rem;
-}
-
 /* Rendered Markdown bodies. */
 .prose {
   max-width: var(--prose-max);
@@ -346,7 +428,7 @@ a:hover {
 }
 
 .prose h2 {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
 }
 
 .prose h3 {
@@ -365,7 +447,7 @@ a:hover {
 .prose blockquote {
   margin: 0;
   padding-left: 1.1rem;
-  border-left: 2px solid var(--line-strong);
+  border-left: 2px solid var(--accent);
   color: var(--ink-2);
   font-style: italic;
 }
@@ -396,8 +478,15 @@ a:hover {
 
   .skip-link,
   .site-nav,
-  .player {
+  .player,
+  svg[aria-hidden='true'] {
     display: none;
+  }
+
+  /* Scroll-driven animation could leave headings at their start state in
+     a print snapshot; force the final state. */
+  .section > h2 {
+    animation: none;
   }
 
   a {

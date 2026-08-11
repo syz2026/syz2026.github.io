@@ -107,10 +107,10 @@ const { Content } = await render(entry);
     margin-bottom: 1rem;
   }
 
+  /* A work's title is set in the engraved face, italic, as on a score. */
   .page-title {
-    font-size: clamp(1.65rem, 1.35rem + 1.8vw, 2.05rem);
-    letter-spacing: -0.015em;
     max-width: 34rem;
+    font-style: italic;
   }
 
   .blurb-lede {
@@ -150,6 +150,7 @@ const { Content } = await render(entry);
 
   .movements {
     margin-top: 2.25rem;
+    counter-reset: movement;
   }
 
   .movements h2 {
@@ -162,10 +163,11 @@ const { Content } = await render(entry);
     margin: 0;
     padding: 0;
     max-width: var(--prose-max);
-    border-top: 1px solid var(--line);
+    border-top: 3px double var(--line-strong);
   }
 
   .movements li {
+    counter-increment: movement;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -175,7 +177,17 @@ const { Content } = await render(entry);
     border-bottom: 1px solid var(--line);
   }
 
+  /* Movements are numbered in roman, as in a score. */
+  .movements li::before {
+    content: counter(movement, upper-roman) '.';
+    min-width: 1.7rem;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: var(--accent);
+  }
+
   .movement-title {
+    flex: 1;
     font-size: 0.98rem;
   }
 
