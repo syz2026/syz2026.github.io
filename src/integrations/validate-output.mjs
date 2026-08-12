@@ -63,6 +63,21 @@ function checkPage(outDir, html, rel, problems) {
     }
   }
 
+  // A label and its value rendered with no space between them. The template
+  // collapses whitespace across a line break between an element and the
+  // expression after it, which has produced this three times now, in the
+  // footer colophon and in two places on the CV. Restricting the pattern to
+  // lowercase, colon, uppercase keeps clock times, interval ratios, and URLs
+  // out of it, and SVG text is dropped first because the harmonic figure is
+  // full of legitimate ratios.
+  const text = html
+    .replace(/<svg[\s\S]*?<\/svg>/gi, ' ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&[a-z]+;/gi, ' ');
+  for (const glued of new Set(text.match(/[a-z]:[A-Z]/g) ?? [])) {
+    add(`renders "${glued}" with no space, so a label has run into its value`);
+  }
+
   for (const m of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const url = m[1];
     if (/^(https?:|mailto:|#|data:)/i.test(url)) continue;

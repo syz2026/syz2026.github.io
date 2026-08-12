@@ -11,12 +11,13 @@ const year = new Date().getFullYear();
       <rect x="19" y="1" width="3.4" height="16"></rect>
     </svg>
     {
-      /* Spacing comes from CSS rather than from markup whitespace, which the
-        template collapses across line breaks between expressions. */
+      /* The spaces are explicit because the template collapses whitespace
+        across a line break, and they are real text rather than CSS margin so
+        the colophon still reads correctly aloud and when copied. */
     }
     <p class="footer-note">
-      <span>&copy; {year} {profile.name}</span>
-      <span class="sep" aria-hidden="true">·</span>
+      <span>&copy; {year} {profile.name}</span>{' '}
+      <span class="sep" aria-hidden="true">·</span>{' '}
       <span>{profile.location}</span>
     </p>
     <ul class="footer-links">
@@ -70,7 +71,7 @@ const year = new Date().getFullYear();
   }
 
   .sep {
-    margin: 0 0.45em;
+    color: var(--ink-3);
   }
 
   .footer-links {

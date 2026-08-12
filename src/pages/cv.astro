@@ -34,7 +34,7 @@ import { pages } from '../data/pages';
         <span>{education.location}</span>
       </p>
       <p class="coursework">
-        <span class="coursework-label">{pages.cv.courseworkLabel}:</span>
+        <span class="coursework-label">{pages.cv.courseworkLabel}:</span>{' '}
         {education.coursework.join(', ')}
       </p>
     </div>
@@ -80,8 +80,7 @@ import { pages } from '../data/pages';
       {
         skills.map((skill) => (
           <p class="skill-row">
-            <span class="skill-group">{skill.group}:</span>
-            {skill.items.join(', ')}
+            <span class="skill-group">{skill.group}:</span> {skill.items.join(', ')}
           </p>
         ))
       }
