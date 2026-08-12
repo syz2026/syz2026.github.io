@@ -32,7 +32,7 @@ const linkEntries = (links ? Object.entries(links) : []) as [
     {tags.map((tag) => <span>{tag}</span>)}
     {
       linkEntries.map(([key, href]) => (
-        <a href={href} rel="noopener noreferrer">
+        <a href={href} rel="noopener noreferrer" aria-label={pages.research.linkAria[key](title)}>
           {pages.research.linkLabels[key]}
         </a>
       ))

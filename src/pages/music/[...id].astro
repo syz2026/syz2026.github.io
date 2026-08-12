@@ -54,7 +54,7 @@ const { Content } = await render(entry);
     {
       score && (
         <p class="score-row">
-          <a class="score-link" href={score}>
+          <a class="score-link" href={score} aria-label={pages.music.scoreAria(title)}>
             {pages.music.scoreLabel}
           </a>
         </p>

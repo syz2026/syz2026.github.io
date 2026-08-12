@@ -23,20 +23,22 @@ import { pages } from '../data/pages';
 
   <section class="section first-section" aria-labelledby="cv-education">
     <h2 id="cv-education">{pages.cv.sections.education}</h2>
-    <div class="entry">
-      <div class="entry-head">
-        <h3 class="entry-title">{education.school}</h3>
-        <span class="dates">{education.graduation}</span>
+    <div class="entries">
+      <div class="entry">
+        <div class="entry-head">
+          <h3 class="entry-title">{education.school}</h3>
+          <span class="dates">{education.graduation}</span>
+        </div>
+        <p class="degree">{education.degree}</p>
+        <p class="meta">
+          <span>Minor: {education.minor}</span>
+          <span>{education.location}</span>
+        </p>
+        <p class="coursework">
+          <span class="coursework-label">{pages.cv.courseworkLabel}:</span>{' '}
+          {education.coursework.join(', ')}
+        </p>
       </div>
-      <p class="degree">{education.degree}</p>
-      <p class="meta">
-        <span>Minor: {education.minor}</span>
-        <span>{education.location}</span>
-      </p>
-      <p class="coursework">
-        <span class="coursework-label">{pages.cv.courseworkLabel}:</span>{' '}
-        {education.coursework.join(', ')}
-      </p>
     </div>
   </section>
 
@@ -76,14 +78,16 @@ import { pages } from '../data/pages';
 
   <section class="section" aria-labelledby="cv-skills">
     <h2 id="cv-skills">{pages.cv.sections.skills}</h2>
-    <div class="entry">
-      {
-        skills.map((skill) => (
-          <p class="skill-row">
-            <span class="skill-group">{skill.group}:</span> {skill.items.join(', ')}
-          </p>
-        ))
-      }
+    <div class="entries">
+      <div class="entry">
+        {
+          skills.map((skill) => (
+            <p class="skill-row">
+              <span class="skill-group">{skill.group}:</span> {skill.items.join(', ')}
+            </p>
+          ))
+        }
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -97,27 +101,11 @@ import { pages } from '../data/pages';
     gap: 0.75rem 1.5rem;
   }
 
+  /* A plain link, not a bordered control: the document carries no other UI
+     chrome, so the resume download is set like the score links. */
   .resume-link {
     font-family: var(--font-sans);
     font-size: 0.85rem;
-    padding: 0.45em 0.95em;
-    border: 1px solid var(--line-strong);
-    border-radius: 3px;
-    text-decoration: none;
-    color: var(--ink);
-  }
-
-  .resume-link:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .resume-link {
-      transition:
-        color 140ms ease,
-        border-color 140ms ease;
-    }
   }
 
   .first-section {
@@ -143,6 +131,14 @@ import { pages } from '../data/pages';
     color: var(--ink-2);
   }
 
+  /* The long coursework list is the heaviest wrap on the page; give it a
+     little more room where the measure is shortest. */
+  @media (max-width: 39.99rem) {
+    .coursework {
+      font-size: 0.9rem;
+    }
+  }
+
   .coursework-label {
     font-family: var(--font-sans);
     font-size: 0.82rem;
@@ -160,10 +156,6 @@ import { pages } from '../data/pages';
 
   .award-title {
     font-size: 0.98rem;
-  }
-
-  .skills {
-    padding-top: 1.25rem;
   }
 
   .skill-row {

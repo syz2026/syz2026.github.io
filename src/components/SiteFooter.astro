@@ -20,26 +20,17 @@ const year = new Date().getFullYear();
       <span class="sep" aria-hidden="true">·</span>{' '}
       <span>{profile.location}</span>
     </p>
-    <ul class="footer-links">
-      {
-        profile.links.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
   </div>
 </footer>
 
 <style>
+  /* The page's last system closes here on the final barline rather than on a
+     hairline, so a list or a rest measure is never left open at the end of a
+     page. The end mark below then restates the close, the way a printed
+     score does. */
   .site-footer {
-    border-top: 1px solid var(--line);
+    border-top: 3px solid var(--ink);
+    margin-top: 4px;
   }
 
   .footer-inner {
@@ -77,26 +68,5 @@ const year = new Date().getFullYear();
 
   .sep {
     color: var(--ink-3);
-  }
-
-  .footer-links {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.35rem 1.2rem;
-    margin: 0;
-    padding: 0;
-  }
-
-  .footer-links a {
-    font-family: var(--font-sans);
-    font-size: 0.8rem;
-    color: var(--ink-2);
-    text-decoration-color: color-mix(in srgb, var(--ink-2) 40%, transparent);
-  }
-
-  .footer-links a:hover {
-    color: var(--accent);
   }
 </style>

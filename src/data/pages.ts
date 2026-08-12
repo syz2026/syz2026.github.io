@@ -10,6 +10,9 @@ export const pages = {
     title: 'Stephen Zhang',
     description:
       'Stephen Zhang, undergraduate in mathematics and computer science at Stanford. Research on gene-culture coevolution and language model measurement, and original composition.',
+    harmonicCaption:
+      'The harmonic series, which is both the integers and the notes an open brass instrument plays. Each stem stands at one over its partial number, and the ratio between neighbouring partials is labelled.',
+    contactHeading: 'Contact and links',
   },
   research: {
     title: 'Research',
@@ -32,6 +35,14 @@ export const pages = {
       code: 'Code',
       slides: 'Slides',
     },
+    /* Accessible names for the bare link labels, built with the entry title
+       so a links list never shows two identical "Paper" items. */
+    linkAria: {
+      paper: (title: string) => `Paper for “${title}”`,
+      preprint: (title: string) => `Preprint of “${title}”`,
+      code: (title: string) => `Code for “${title}”`,
+      slides: (title: string) => `Slides for “${title}”`,
+    },
     backLabel: 'All research',
   },
   music: {
@@ -44,6 +55,9 @@ export const pages = {
     inProgressLabel: 'In progress',
     recordingLabel: 'Recording',
     scoreLabel: 'Score (PDF)',
+    scoreAria: (title: string) => `Score (PDF) for “${title}”`,
+    audioAria: (title: string) => `Recording of “${title}”`,
+    downloadAria: (title: string) => `Download the recording of “${title}” (MP3)`,
     downloadLabel: 'Download the recording (MP3)',
     movementsHeading: 'Movements',
     backLabel: 'All works',

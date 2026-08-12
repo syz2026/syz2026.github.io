@@ -108,7 +108,7 @@ export const activities: Position[] = [
 export const awards = [
   { title: 'Stanford Math Tournament, Distinguished Honorable Mention (Top 10%)', year: '2024' },
   { title: 'USA Physics Olympiad Semifinalist (Top 400 in U.S.)', year: '2022' },
-  { title: '5x AIME Qualifier', year: '2020 - 2025' },
+  { title: '5x AIME Qualifier', year: '2020\u20132025' },
   { title: 'Fellow of the Royal Schools of Music in Trumpet Performance', year: '2025' },
   { title: 'CLASS National Chinese Essay Contest Gold Prize', year: '2023' },
 ] as const;

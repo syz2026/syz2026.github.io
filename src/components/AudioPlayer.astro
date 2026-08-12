@@ -15,8 +15,10 @@ const { src, title } = Astro.props;
     <span class="player-label">{pages.music.recordingLabel}</span>
     <span class="player-title">{title}</span>
   </figcaption>
-  <audio controls preload="none" src={src}>
-    <a href={src} download>{pages.music.downloadLabel}</a>
+  <audio controls preload="none" src={src} aria-label={pages.music.audioAria(title)}>
+    <a href={src} download aria-label={pages.music.downloadAria(title)}>
+      {pages.music.downloadLabel}
+    </a>
   </audio>
 </figure>
 

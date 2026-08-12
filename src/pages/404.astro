@@ -25,15 +25,18 @@ import { pages } from '../data/pages';
     padding-top: 1.5rem;
   }
 
+  /* Stroke weight matches the stems in the harmonic figure, about 1.5px once
+     the viewBox scales to the rendered width; the old 3px strokes outweighed
+     the footer's end mark. */
   .caesura {
-    width: 2.1rem;
+    width: 2.35rem;
     height: auto;
     margin-bottom: 1.4rem;
   }
 
   .caesura path {
     stroke: var(--accent);
-    stroke-width: 3;
+    stroke-width: 1.6;
     stroke-linecap: round;
     fill: none;
   }

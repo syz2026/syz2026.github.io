@@ -7,15 +7,25 @@
  */
 interface Props {
   text: string;
+  /**
+   * A page holds at most one notated rest. Where two empty states land on
+   * the same page, the rest keeps the full measure and the quiet variant
+   * carries the copy alone, so a pair of rests never reads as "no content".
+   */
+  variant?: 'rest' | 'quiet';
 }
 
-const { text } = Astro.props;
+const { text, variant = 'rest' } = Astro.props;
 ---
 
-<div class="empty-state">
-  <div class="measure" aria-hidden="true">
-    <span class="rest"></span>
-  </div>
+<div class={`empty-state empty-${variant}`}>
+  {
+    variant === 'rest' && (
+      <div class="measure" aria-hidden="true">
+        <span class="rest" />
+      </div>
+    )
+  }
   <p>{text}</p>
 </div>
 
@@ -23,6 +33,16 @@ const { text } = Astro.props;
   .empty-state {
     border-top: 3px double var(--line-strong);
     padding: 2.5rem 0 2.75rem;
+  }
+
+  /* The rest measure closes like every other list on the site: a light-heavy
+     final barline below, so the silence reads as a movement that has ended
+     rather than as a phrase still waiting for its next bar. */
+  .empty-state::after {
+    content: '';
+    display: block;
+    margin-top: 2rem;
+    border-top: 3px solid var(--ink);
   }
 
   /* Five staff lines, drawn as backgrounds so they span the full measure. */
@@ -81,5 +101,15 @@ const { text } = Astro.props;
     text-align: center;
     font-style: italic;
     color: var(--ink-2);
+  }
+
+  /* The quiet variant keeps the measure grammar but drops the staff, so the
+     copy carries the silence on its own. */
+  .empty-quiet {
+    padding: 1.9rem 0 2rem;
+  }
+
+  .empty-quiet p {
+    margin-top: 0;
   }
 </style>

@@ -66,7 +66,8 @@
     --ink-2: #bcb29a;
     --ink-3: #958b73;
     --line: #2b3a4f;
-    --line-strong: #3e5069;
+    /* #48597a: 3.23 on the navy paper, so the staff survives dark mode. */
+    --line-strong: #48597a;
     --accent: #d9ab4a;
     --accent-strong: #f0c670;
     --accent-soft: #2c2a1c;
@@ -260,6 +261,15 @@ main {
   transform: translateY(-0.28em);
 }
 
+/* The heading already speaks one score dialect, the movement numeral. The
+   hairline trailing into the list's double bar stacked a second dialect on
+   top, so it steps back on narrow screens where the two sit closest. */
+@media (max-width: 39.99rem) {
+  .section > h2::after {
+    content: none;
+  }
+}
+
 /* Sections rise faintly as they enter, where scroll-driven animation is
    supported. Without support or under reduced motion they render static. */
 @supports (animation-timeline: view()) {
@@ -316,7 +326,17 @@ main {
 
 .entry {
   padding: 1.5rem 0 1.6rem;
+}
+
+/* Barlines belong to the rows, so a single .entry outside an .entries list
+   still closes on the same final barline as everything else. */
+.entries .entry,
+.entry {
   border-bottom: 1px solid var(--line);
+}
+
+.entries .entry:last-of-type {
+  border-bottom-color: var(--line-strong);
 }
 
 .entry-head {
@@ -404,9 +424,12 @@ main {
   color: var(--paper);
 }
 
+/* Unsubmitted work stays in neutral ink: in brass it read as a highlight,
+   and a highlight beside published titles suggests the opposite of what the
+   label says. Only peer-reviewed work wears the accent. */
 .status[data-status='complete-unsubmitted'] {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--ink-3);
+  color: var(--ink-2);
 }
 
 .status[data-status='in-progress'] {
@@ -477,6 +500,37 @@ main {
 
 .prose code {
   font-size: 0.85em;
+}
+
+/* ==========================================================================
+   Narrow screens: a retune rather than a pure reflow.
+
+   The reading size steps down with the page so lines stay near a readable
+   measure, meta lines relax, and dates may wrap at their separator instead
+   of standing stranded on a row of their own. The figure's own narrow
+   arrangement lives in HarmonicSeries.astro.
+   ========================================================================== */
+
+@media (max-width: 39.99rem) {
+  html {
+    font-size: 106.25%; /* 17px */
+  }
+
+  .lede {
+    font-size: 1.08rem;
+  }
+
+  .entry {
+    padding: 1.25rem 0 1.3rem;
+  }
+
+  .entry-head {
+    row-gap: 0.15rem;
+  }
+
+  .dates {
+    white-space: normal;
+  }
 }
 
 /* ==========================================================================

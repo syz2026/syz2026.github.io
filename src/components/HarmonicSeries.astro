@@ -6,13 +6,20 @@
  * plotted function, and a phrase of notation, which is the one object
  * where Stephen's mathematics and his music coincide.
  *
- * Decorative: the same idea is carried in the copy, so the figure is
- * hidden from assistive technology. Hovering a partial reveals the ratio
- * of the interval it forms with the partial before it.
+ * The figure is labelled by the figcaption in index.astro, which states
+ * the idea in words, and the ratios are always visible: content that only
+ * appears on :hover does not exist on a touch screen. Hover now only
+ * brightens the note head.
+ *
+ * Narrow viewports get a shorter phrase, partials 1–5 on a closer spacing
+ * with larger heads, so the smallest phone still gets a legible statement
+ * rather than a smudge. The long phrase is display:none there, and
+ * display:none removes an SVG from the accessibility tree, so the two
+ * never double up for assistive technology.
  */
 const BASE_X = 84;
 const STEP = 78;
-const BASE_Y = 144;
+const BASE_Y = 148;
 const MAX_HEIGHT = 118;
 
 const ratios = ['1:1', '2:1', '3:2', '4:3', '5:4', '6:5', '7:6', '8:7'];
@@ -24,15 +31,31 @@ const partials = ratios.map((ratio, i) => {
   return { n, x, top, ratio };
 });
 
-const staffLines = [96, 108, 120, 132, 144];
+const staffLines = [100, 112, 124, 136, 148];
+
+/* The narrow arrangement: partials 1–6, same pitches, recomputed. Six is
+   where the spacing still leaves the heads and ratio labels legible. */
+const S_BASE_X = 64;
+const S_STEP = 98;
+const S_BASE_Y = 172;
+const S_MAX_HEIGHT = 150;
+
+const smallPartials = ratios.slice(0, 6).map((ratio, i) => {
+  const n = i + 1;
+  const x = S_BASE_X + i * S_STEP;
+  const top = +(S_BASE_Y - S_MAX_HEIGHT / n).toFixed(2);
+  return { n, x, top, ratio };
+});
+
+const smallStaffLines = [124, 136, 148, 160, 172];
 ---
 
-<svg class="harmonics" viewBox="0 0 720 200" aria-hidden="true" focusable="false">
+<svg class="harmonics harmonics-full" viewBox="0 0 720 208" aria-hidden="true" focusable="false">
   <g>
     {staffLines.map((y) => <line class="hs-staff" x1="28" x2="692" y1={y} y2={y} pathLength="1" />)}
-    <line class="hs-bar" x1="28" y1="96" x2="28" y2="144" pathLength="1"></line>
-    <line class="hs-bar" x1="686" y1="96" x2="686" y2="144" pathLength="1"></line>
-    <rect class="hs-bar-final" x="689.5" y="96" width="3.5" height="48"></rect>
+    <line class="hs-bar" x1="28" y1="100" x2="28" y2="148" pathLength="1"></line>
+    <line class="hs-bar" x1="686" y1="100" x2="686" y2="148" pathLength="1"></line>
+    <rect class="hs-bar-final" x="689.5" y="100" width="3.5" height="48"></rect>
   </g>
   {
     partials.map((p) => (
@@ -48,7 +71,40 @@ const staffLines = [96, 108, 120, 132, 144];
         <text class="hs-ratio" x={p.x} y={p.top - 14} text-anchor="middle">
           {p.ratio}
         </text>
-        <text class="hs-num" x={p.x} y="172" text-anchor="middle">
+        <text class="hs-num" x={p.x} y="176" text-anchor="middle">
+          {p.n}
+        </text>
+      </g>
+    ))
+  }
+</svg>
+
+<svg class="harmonics harmonics-small" viewBox="0 0 600 240" aria-hidden="true" focusable="false">
+  <g>
+    {
+      smallStaffLines.map((y) => (
+        <line class="hs-staff" x1="14" x2="586" y1={y} y2={y} pathLength="1" />
+      ))
+    }
+    <line class="hs-bar" x1="14" y1="124" x2="14" y2="172" pathLength="1"></line>
+    <line class="hs-bar" x1="580" y1="124" x2="580" y2="172" pathLength="1"></line>
+    <rect class="hs-bar-final" x="583.5" y="124" width="3.5" height="48"></rect>
+  </g>
+  {
+    smallPartials.map((p) => (
+      <g class={`partial p${p.n}`}>
+        <line class="hs-stem" x1={p.x} y1={S_BASE_Y} x2={p.x} y2={p.top} pathLength="1" />
+        <ellipse
+          class="hs-head"
+          cx={p.x}
+          cy={p.top}
+          rx={p.n === 1 ? 9.5 : 8}
+          ry={p.n === 1 ? 7 : 5.8}
+        />
+        <text class="hs-ratio" x={p.x} y={p.top - 16} text-anchor="middle">
+          {p.ratio}
+        </text>
+        <text class="hs-num" x={p.x} y="204" text-anchor="middle">
           {p.n}
         </text>
       </g>
@@ -61,7 +117,24 @@ const staffLines = [96, 108, 120, 132, 144];
     display: block;
     width: 100%;
     height: auto;
-    margin: 2.4rem 0 2.6rem;
+    margin: 2.4rem 0 0.6rem;
+  }
+
+  .harmonics-small {
+    display: none;
+  }
+
+  /* Below 40rem the long phrase collapses, so the figure modulates to a
+     shorter one: partials 1–6, wider spacing, larger heads and labels. */
+  @media (max-width: 39.99rem) {
+    .harmonics-full {
+      display: none;
+    }
+
+    .harmonics-small {
+      display: block;
+      margin-top: 2rem;
+    }
   }
 
   .hs-staff {
@@ -104,7 +177,14 @@ const staffLines = [96, 108, 120, 132, 144];
     font-family: var(--font-sans);
     font-size: 10.5px;
     letter-spacing: 0.05em;
-    opacity: 0;
+  }
+
+  .harmonics-small .hs-num {
+    font-size: 13px;
+  }
+
+  .harmonics-small .hs-ratio {
+    font-size: 12.5px;
   }
 
   .partial {
@@ -115,18 +195,10 @@ const staffLines = [96, 108, 120, 132, 144];
     fill: var(--accent-strong);
   }
 
-  .partial:hover .hs-ratio {
-    opacity: 1;
-  }
-
   /* The staff draws across, then the partials rise one by one, like the
      series being sounded. Under reduced motion none of this runs and the
      figure renders complete. */
   @media (prefers-reduced-motion: no-preference) {
-    .hs-ratio {
-      transition: opacity 160ms ease;
-    }
-
     .hs-head {
       transition: fill 140ms ease;
     }

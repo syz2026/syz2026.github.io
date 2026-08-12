@@ -51,7 +51,11 @@ const linkEntries = (links ? Object.entries(links) : []) as [
       linkEntries.length > 0 && (
         <p class="meta links-row">
           {linkEntries.map(([key, href]) => (
-            <a href={href} rel="noopener noreferrer">
+            <a
+              href={href}
+              rel="noopener noreferrer"
+              aria-label={pages.research.linkAria[key](title)}
+            >
               {pages.research.linkLabels[key]}
             </a>
           ))}

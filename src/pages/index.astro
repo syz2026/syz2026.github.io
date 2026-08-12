@@ -11,7 +11,10 @@ import { pages } from '../data/pages';
     <p class="tagline">{profile.tagline}</p>
   </header>
 
-  <HarmonicSeries />
+  <figure class="harmonic-figure">
+    <HarmonicSeries />
+    <figcaption class="harmonic-caption">{pages.home.harmonicCaption}</figcaption>
+  </figure>
 
   <figure class="headshot">
     <img
@@ -27,6 +30,7 @@ import { pages } from '../data/pages';
     {profile.bio.map((paragraph) => <p>{paragraph}</p>)}
   </div>
 
+  <h2 class="visually-hidden">{pages.home.contactHeading}</h2>
   <ul class="contact-links">
     {
       profile.links.map((link) => (
@@ -64,6 +68,22 @@ import { pages } from '../data/pages';
     margin-top: 0.8rem;
     font-size: 1.2rem;
     font-style: italic;
+    color: var(--ink-2);
+  }
+
+  /* The caption is the figure's accessible name and states the theme in
+     words, so the idea survives for anyone who cannot see the drawing. */
+  .harmonic-figure {
+    margin: 0 0 1.6rem;
+  }
+
+  .harmonic-caption {
+    max-width: var(--prose-max);
+    margin: 0 auto;
+    text-align: center;
+    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.5;
     color: var(--ink-2);
   }
 
