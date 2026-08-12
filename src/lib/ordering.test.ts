@@ -37,6 +37,29 @@ describe('byOrderThenYear', () => {
     const sorted = [entry('undated'), entry('dated', { year: 2020 })].sort(byOrderThenYear);
     expect(ids(sorted)).toEqual(['dated', 'undated']);
   });
+
+  it('breaks a tie between equally pinned entries by year, not by input order', () => {
+    const sorted = [
+      entry('older', { order: 1, year: 2001 }),
+      entry('newer', { order: 1, year: 2026 }),
+    ].sort(byOrderThenYear);
+    expect(ids(sorted)).toEqual(['newer', 'older']);
+  });
+
+  it('treats order 0 as a real pin rather than as absent', () => {
+    const sorted = [
+      entry('unpinned', { year: 2026 }),
+      entry('pinned', { order: 0, year: 1999 }),
+    ].sort(byOrderThenYear);
+    expect(ids(sorted)).toEqual(['pinned', 'unpinned']);
+  });
+
+  it('accepts a negative order, which sorts ahead of zero', () => {
+    const sorted = [entry('zero', { order: 0 }), entry('negative', { order: -1 })].sort(
+      byOrderThenYear,
+    );
+    expect(ids(sorted)).toEqual(['negative', 'zero']);
+  });
 });
 
 describe('isVisible', () => {
@@ -77,8 +100,9 @@ describe('selectEntries', () => {
 
   it('does not mutate the array it is given', () => {
     const original = ids(entries);
-    selectEntries(entries, false);
+    const result = selectEntries(entries, false);
     expect(ids(entries)).toEqual(original);
+    expect(result).not.toBe(entries);
   });
 
   it('returns an empty array for an empty collection, which is the current state', () => {

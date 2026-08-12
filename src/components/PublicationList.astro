@@ -1,11 +1,13 @@
 ---
 import type { Publication } from '../data/publications';
+import { pages } from '../data/pages';
 
 interface Props {
   items: readonly Publication[];
 }
 
 const { items } = Astro.props;
+const kindLabels = pages.research.kindLabels;
 ---
 
 <ul class="entries">
@@ -21,13 +23,17 @@ const { items } = Astro.props;
             pub.title
           )}
         </h3>
-        <p class="authors">{pub.authors}</p>
+        <p class="authors">
+          {pub.authors}
+          {pub.authorshipNote && <span class="authorship">({pub.authorshipNote})</span>}
+        </p>
         <p class="meta">
           <span class="venue">
             {pub.venue}
             {pub.detail && `, ${pub.detail}`}
           </span>
           <span>{pub.year}</span>
+          <span class="kind">{kindLabels[pub.kind]}</span>
           {pub.secondary && (
             <a href={pub.secondary.href} rel="noopener noreferrer">
               {pub.secondary.label}
@@ -54,5 +60,16 @@ const { items } = Astro.props;
     font-family: var(--font-serif);
     font-size: 0.92rem;
     font-style: italic;
+  }
+
+  /* Placeholder treatment only. The design lead should set how the kind and
+     the authorship note sit in the meta line. */
+  .authorship {
+    font-style: italic;
+  }
+
+  .kind {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
   }
 </style>

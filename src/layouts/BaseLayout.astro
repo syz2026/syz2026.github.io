@@ -50,7 +50,11 @@ const csp = [
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
-    <link rel="canonical" href={canonical} />
+    {
+      /* The 404 response is served for whatever path was requested, so a
+        canonical pointing at /404 would name a URL that does not exist. */
+    }
+    {!noindex && <link rel="canonical" href={canonical} />}
     {
       /* The display face sets the first heading on every page, so fetching it
         early avoids a visible swap from the fallback serif. */

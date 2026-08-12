@@ -1,0 +1,12 @@
+{
+  "why": "A PDF carries text that no review of the site's HTML will ever see. The resume published here originally contained a phone number, because it was copied straight from the version used for job applications, and nothing in the build was in a position to notice. Every PDF that reaches the output must therefore be listed below with the hash of the exact bytes that were read and approved. An unlisted PDF, or a listed one whose bytes changed, fails the build.",
+  "howToUpdate": "Open the new file, read it, confirm it carries no phone number, street address, or anything else that should not be public, then run: shasum -a 256 public/media/<file> and paste the hash here with today's date. Updating the hash without reading the document defeats the point of the check.",
+  "documents": {
+    "media/stephen-zhang-resume.pdf": {
+      "sha256": "1d5004c24f09506a9e54375e371762605536369273eb84b25551d38ed7fd9093",
+      "reviewed": "2026-08-12",
+      "checkedFor": "phone number, street address",
+      "note": "Rebuilt from the LaTeX source with the phone line removed. Header reads email and city only. One page, content otherwise identical to the application version."
+    }
+  }
+}

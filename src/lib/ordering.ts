@@ -14,10 +14,13 @@ export type Draftable = { data: { draft: boolean } };
 export function byOrderThenYear<T extends Sortable>(a: T, b: T): number {
   const ao = a.data.order;
   const bo = b.data.order;
-  if (ao !== undefined && bo !== undefined) return ao - bo;
+  const byYear = (b.data.year ?? 0) - (a.data.year ?? 0);
+  // Two entries pinned to the same position fall back to year rather than to
+  // whatever order the loader happened to return, which is not stable.
+  if (ao !== undefined && bo !== undefined) return ao - bo || byYear;
   if (ao !== undefined) return -1;
   if (bo !== undefined) return 1;
-  return (b.data.year ?? 0) - (a.data.year ?? 0);
+  return byYear;
 }
 
 export function isVisible<T extends Draftable>(entry: T, includeDrafts: boolean): boolean {

@@ -15,8 +15,12 @@ export const pages = {
     title: 'Research',
     description: 'Peer-reviewed publications and independent research projects by Stephen Zhang.',
     intro:
-      'Peer-reviewed publications come first, and independent projects follow. Every independent entry carries its real status, because most of that work is complete but unsubmitted and listing it beside a journal paper without that label would probably overstate it.',
+      'Published work comes first, and independent projects follow. Every entry carries its real status, because most of that work is complete but unsubmitted and listing it beside a journal paper without that label would probably overstate it.',
     publicationsHeading: 'Publications',
+    kindLabels: {
+      'peer-reviewed': 'Peer reviewed',
+      magazine: 'Magazine article',
+    },
     independentHeading: 'Independent projects',
     independentEmpty:
       'No independent projects are listed yet. I am still deciding which of them are ready to show.',
