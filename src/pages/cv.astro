@@ -12,7 +12,7 @@ import {
   skills,
 } from '../data/profile';
 import { publications } from '../data/publications';
-import { pages } from '../data/pages';
+import { pages, ui } from '../data/pages';
 ---
 
 <BaseLayout title={pages.cv.title} description={pages.cv.description}>
@@ -31,7 +31,7 @@ import { pages } from '../data/pages';
         </div>
         <p class="degree">{education.degree}</p>
         <p class="meta">
-          <span>Minor: {education.minor}</span>
+          <span>{ui.minorLabel}: {education.minor}</span>
           <span>{education.location}</span>
         </p>
         <p class="coursework">

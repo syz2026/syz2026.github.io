@@ -1,6 +1,6 @@
 ---
 import { profile } from '../data/profile';
-import { nav } from '../data/pages';
+import { nav, ui } from '../data/pages';
 
 const pathname = Astro.url.pathname;
 const isCurrent = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
@@ -8,7 +8,7 @@ const isCurrent = (href: string) => (href === '/' ? pathname === '/' : pathname.
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="site-name" href="/" aria-label={`${profile.name}, home`}>
+    <a class="site-name" href="/" aria-label={ui.homeLinkLabel}>
       <svg class="mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <line x1="2" y1="7" x2="22" y2="7"></line>
         <line x1="2" y1="10.5" x2="22" y2="10.5"></line>
@@ -19,7 +19,7 @@ const isCurrent = (href: string) => (href === '/' ? pathname === '/' : pathname.
       </svg>
       <span>{profile.name}</span>
     </a>
-    <nav class="site-nav" aria-label="Primary">
+    <nav class="site-nav" aria-label={ui.primaryNavLabel}>
       <ul>
         {
           nav.map((item) => (

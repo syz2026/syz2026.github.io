@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { profile } from '../data/profile';
+import { ui } from '../data/pages';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 
@@ -74,10 +75,11 @@ const csp = [
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={ui.headshotAlt} />
     <meta name="twitter:card" content="summary" />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to main content</a>
+    <a class="skip-link" href="#main">{ui.skipToContent}</a>
     <SiteHeader />
     <main id="main">
       <slot />

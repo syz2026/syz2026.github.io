@@ -5,6 +5,16 @@ export const nav = [
   { label: 'CV', href: '/cv' },
 ] as const;
 
+/** Strings the interface needs that belong to no single page. */
+export const ui = {
+  skipToContent: 'Skip to main content',
+  primaryNavLabel: 'Primary',
+  homeLinkLabel: 'Stephen Zhang, home',
+  minorLabel: 'Minor',
+  headshotAlt:
+    'Studio headshot of Stephen Zhang in a dark blazer and white shirt, against a plain grey background',
+} as const;
+
 export const pages = {
   home: {
     title: 'Stephen Zhang',

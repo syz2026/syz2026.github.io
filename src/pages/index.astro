@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HarmonicSeries from '../components/HarmonicSeries.astro';
 import { profile } from '../data/profile';
-import { pages } from '../data/pages';
+import { pages, ui } from '../data/pages';
 ---
 
 <BaseLayout title={pages.home.title} description={pages.home.description}>
@@ -17,13 +17,7 @@ import { pages } from '../data/pages';
   </figure>
 
   <figure class="headshot">
-    <img
-      src={profile.headshot}
-      alt="Studio headshot of Stephen Zhang in a dark blazer and white shirt, against a plain grey background"
-      width="759"
-      height="800"
-      decoding="async"
-    />
+    <img src={profile.headshot} alt={ui.headshotAlt} width="759" height="800" decoding="async" />
   </figure>
 
   <div class="bio">
