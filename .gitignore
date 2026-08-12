@@ -2,6 +2,9 @@ dist/
 .astro/
 node_modules/
 .DS_Store
+# Local screenshot helper, needs Chrome started with --remote-debugging-port
+.shot.mjs
+.shots/
 *.log
 .env
 .env.production

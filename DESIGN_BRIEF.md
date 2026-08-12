@@ -50,7 +50,13 @@ around one is not an option.
   blocked by the browser anyway. Everything is CSS, HTML, and SVG.
 - **No network at build or runtime.** No Google Fonts, no CDN stylesheets, no
   remote images, no new npm packages. `astro` is now the only runtime dependency
-  and that must stay true. Fonts come from a system stack.
+  and that must stay true.
+- **Fonts.** The display face is self-hosted and committed at
+  `public/fonts/bodoni-moda-latin-700-normal.woff2` (Bodoni Moda, SIL Open Font
+  License, 15 KB, weight 700 only), so titles render identically on every
+  platform. Text and label faces still come from a system stack. Adding a weight
+  or a style means committing another file and preloading it, so prefer working
+  within the one weight that exists.
 - **Plain CSS.** Global tokens in `src/styles/global.css`, everything else in
   component `<style>` blocks. No Tailwind, no CSS-in-JS. Astro emits these as
   external files, which the CSP requires, so never hand-write a `<style>` tag

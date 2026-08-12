@@ -12,6 +12,20 @@
    10.92 · paper on accent 8.28 · ink on accent-soft 11.50 (on --paper)
    ========================================================================== */
 
+/* The display face is self-hosted rather than borrowed from the system, so the
+   title page is engraved everywhere and not only on macOS, where Bodoni 72
+   happens to ship. Bodoni Moda under the SIL Open Font License, latin subset,
+   700 only, which is the single weight the site sets. 15 KB, same origin, and
+   preloaded in the base layout because it renders in the first heading.
+   License: public/fonts/bodoni-moda-OFL.txt */
+@font-face {
+  font-family: 'Bodoni Moda';
+  src: url('/fonts/bodoni-moda-latin-700-normal.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
 
@@ -27,8 +41,9 @@
   --accent-soft: #f0e8d2;
 
   /* Engraved display face for titles, Charter for reading, Optima for
-     labels. Each stack degrades to common system faces. */
-  --font-display: 'Bodoni 72', Didot, 'Bodoni MT', 'Times New Roman', Georgia, serif;
+     labels. The display face is self-hosted so it is identical everywhere;
+     the rest degrade to common system faces. */
+  --font-display: 'Bodoni Moda', 'Bodoni 72', Didot, 'Bodoni MT', 'Times New Roman', Georgia, serif;
   --font-serif:
     Charter, 'Bitstream Charter', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
   --font-sans:

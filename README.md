@@ -84,6 +84,7 @@ after review, and the workflow is read-only except for the deploy job.
 | `src/layouts/`, `src/components/`, `src/styles/` | The design system                                  |
 | `src/pages/`                                     | Routes                                             |
 | `public/media/`                                  | Headshot, resume PDF, and audio and score files    |
+| `public/fonts/`                                  | Self-hosted display face and its OFL license       |
 
 Prose belongs in `src/data/pages.ts` rather than in templates, so copy can be
 edited without touching markup. [DESIGN_BRIEF.md](DESIGN_BRIEF.md) records the
