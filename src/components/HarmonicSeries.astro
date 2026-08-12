@@ -11,11 +11,14 @@
  * appears on :hover does not exist on a touch screen. Hover now only
  * brightens the note head.
  *
- * Narrow viewports get a shorter phrase, partials 1–5 on a closer spacing
+ * Narrow viewports get a shorter phrase, partials 1–6 on a wider spacing
  * with larger heads, so the smallest phone still gets a legible statement
  * rather than a smudge. The long phrase is display:none there, and
  * display:none removes an SVG from the accessibility tree, so the two
  * never double up for assistive technology.
+ *
+ * Every part of the figure renders at rest without help from an animation.
+ * See the note above the keyframes for why that is not negotiable here.
  */
 const BASE_X = 84;
 const STEP = 78;
@@ -140,7 +143,6 @@ const smallStaffLines = [124, 136, 148, 160, 172];
   .hs-staff {
     stroke: var(--line-strong);
     stroke-width: 1;
-    stroke-dasharray: 1;
   }
 
   .hs-bar {
@@ -155,7 +157,6 @@ const smallStaffLines = [124, 136, 148, 160, 172];
   .hs-stem {
     stroke: var(--ink-2);
     stroke-width: 1.5;
-    stroke-dasharray: 1;
   }
 
   .hs-head {
@@ -195,119 +196,53 @@ const smallStaffLines = [124, 136, 148, 160, 172];
     fill: var(--accent-strong);
   }
 
-  /* The staff draws across, then the partials rise one by one, like the
-     series being sounded. Under reduced motion none of this runs and the
-     figure renders complete. */
+  /* The heads settle in one by one, like the series being sounded.
+     
+     Nothing here starts from a state that hides the figure. An earlier version
+     drew the staff and stems on with stroke-dashoffset and faded the heads up
+     from opacity 0, all with fill-mode: both, so any environment where the
+     animation timeline did not advance left the whole figure invisible with
+     only the ratio labels floating in blank space. Headless Chrome does exactly
+     that. A settling animation can be frozen at any frame and the figure still
+     reads, which is the property that matters more than the flourish. */
   @media (prefers-reduced-motion: no-preference) {
     .hs-head {
       transition: fill 140ms ease;
+      animation: head-settle 420ms cubic-bezier(0.2, 0.7, 0.3, 1.2) both;
     }
 
-    .hs-staff,
-    .hs-bar {
-      animation: draw 520ms ease-out both;
+    .p1 .hs-head {
+      animation-delay: 60ms;
     }
-
-    .hs-bar-final {
-      animation: fade-in 520ms ease-out both;
+    .p2 .hs-head {
+      animation-delay: 140ms;
     }
-
-    .hs-stem {
-      animation: draw 340ms ease-out both;
+    .p3 .hs-head {
+      animation-delay: 220ms;
     }
-
-    .hs-head {
-      animation: head-in 380ms cubic-bezier(0.2, 0.7, 0.3, 1.2) both;
+    .p4 .hs-head {
+      animation-delay: 300ms;
     }
-
-    .hs-num {
-      animation: fade-in 380ms ease-out both;
+    .p5 .hs-head {
+      animation-delay: 380ms;
     }
-
-    .p1 .hs-stem {
-      animation-delay: 420ms;
+    .p6 .hs-head {
+      animation-delay: 460ms;
     }
-    .p1 .hs-head,
-    .p1 .hs-num {
-      animation-delay: 680ms;
+    .p7 .hs-head {
+      animation-delay: 540ms;
     }
-    .p2 .hs-stem {
-      animation-delay: 510ms;
-    }
-    .p2 .hs-head,
-    .p2 .hs-num {
-      animation-delay: 770ms;
-    }
-    .p3 .hs-stem {
-      animation-delay: 600ms;
-    }
-    .p3 .hs-head,
-    .p3 .hs-num {
-      animation-delay: 860ms;
-    }
-    .p4 .hs-stem {
-      animation-delay: 690ms;
-    }
-    .p4 .hs-head,
-    .p4 .hs-num {
-      animation-delay: 950ms;
-    }
-    .p5 .hs-stem {
-      animation-delay: 780ms;
-    }
-    .p5 .hs-head,
-    .p5 .hs-num {
-      animation-delay: 1040ms;
-    }
-    .p6 .hs-stem {
-      animation-delay: 870ms;
-    }
-    .p6 .hs-head,
-    .p6 .hs-num {
-      animation-delay: 1130ms;
-    }
-    .p7 .hs-stem {
-      animation-delay: 960ms;
-    }
-    .p7 .hs-head,
-    .p7 .hs-num {
-      animation-delay: 1220ms;
-    }
-    .p8 .hs-stem {
-      animation-delay: 1050ms;
-    }
-    .p8 .hs-head,
-    .p8 .hs-num {
-      animation-delay: 1310ms;
+    .p8 .hs-head {
+      animation-delay: 620ms;
     }
   }
 
-  @keyframes draw {
+  @keyframes head-settle {
     from {
-      stroke-dashoffset: 1;
+      transform: rotate(-16deg) scale(0.86);
     }
     to {
-      stroke-dashoffset: 0;
-    }
-  }
-
-  @keyframes head-in {
-    from {
-      opacity: 0;
-      transform: rotate(-16deg) scale(0.3);
-    }
-    to {
-      opacity: 1;
       transform: rotate(-16deg) scale(1);
-    }
-  }
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
     }
   }
 </style>
