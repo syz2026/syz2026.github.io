@@ -16,10 +16,10 @@ export const profile = {
     { label: 'Hugging Face', href: 'https://huggingface.co/SYZ-Alpha' },
   ],
   bio: [
-    'I am an undergraduate at Stanford studying mathematics and computer science, with a minor in music for trumpet performance. I expect to graduate in June 2029.',
-    'Since 2023 I have worked in the Feldman Lab in Stanford\u2019s biology department, where I build stochastic, agent-based, and equation-based models of gene-culture coevolution in Python and derive analytical results that are then checked against simulation. That work produced a paper in Theoretical Population Biology in 2025, and a second manuscript is under review.',
-    'The engineering happens elsewhere. At Alpha AI Engineering I fine-tuned a sub-billion-parameter language model with LoRA and graded its output by execution rather than by model scoring, ran transformer pretraining sweeps on a SLURM cluster, modified the Rust scheduling backend of an Anki fork, and built full-stack applications in TypeScript, React, and Firebase. At EquityBound I analyze small and medium enterprise valuations and audit the codebase that produces them.',
-    'I play trumpet and compose for orchestra. I am a Fellow of the Royal Schools of Music in trumpet performance, and I serve as Financial Officer of Stanford Orchestras, where I manage a budget of more than $40,000.',
+    'I\u2019m an undergraduate at Stanford studying mathematics and computer science, with a minor in music (trumpet performance). I graduate in June 2029.',
+    'Since 2023 I\u2019ve worked in the Feldman Lab in Stanford\u2019s biology department. I build stochastic, agent-based, and equation-based models of gene-culture coevolution in Python, and check the analytical results against simulation. That work led to a paper in Theoretical Population Biology in 2025; a second manuscript is under review.',
+    'At Alpha AI Engineering, I fine-tuned a sub-billion-parameter language model with LoRA and graded its output by execution rather than by model scoring. I also ran transformer pretraining sweeps on a SLURM cluster, modified the Rust scheduling backend of an Anki fork, and built full-stack applications in TypeScript, React, and Firebase. At EquityBound, I analyze small and medium enterprise valuations and audit the codebase that produces them.',
+    'I play trumpet and compose for orchestra. I\u2019m a Fellow of the Royal Schools of Music in trumpet performance, and I serve as Financial Officer of Stanford Orchestras, managing a budget of more than $40,000.',
   ],
 } as const;
 

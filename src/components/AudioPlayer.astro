@@ -11,7 +11,6 @@ const { src, title } = Astro.props;
 
 <figure class="player">
   <figcaption>
-    <span class="player-note" aria-hidden="true"></span>
     <span class="player-label">{pages.music.recordingLabel}</span>
     <span class="player-title">{title}</span>
   </figcaption>
@@ -23,12 +22,10 @@ const { src, title } = Astro.props;
 </figure>
 
 <style>
-  /* The recording sits in its own bracketed system: double bar above,
-     hairline below. */
   .player {
     margin: 1.75rem 0 0;
     padding: 1.2rem 0 1.35rem;
-    border-top: 3px double var(--line-strong);
+    border-top: 1px solid var(--line-strong);
     border-bottom: 1px solid var(--line);
   }
 
@@ -38,15 +35,6 @@ const { src, title } = Astro.props;
     align-items: baseline;
     gap: 0.2rem 0.75rem;
     margin-bottom: 0.9rem;
-  }
-
-  .player-note {
-    align-self: center;
-    width: 0.62em;
-    height: 0.62em;
-    border-radius: 50% 50% 50% 50% / 58% 58% 42% 42%;
-    background: var(--accent);
-    transform: rotate(-16deg);
   }
 
   .player-label {

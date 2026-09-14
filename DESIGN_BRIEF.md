@@ -1,5 +1,14 @@
 # Design brief
 
+> **Direction reversed, 14 September 2026.** Stephen asked for the site to be
+> made simple and for the decorative graphics to go. The harmonic-series figure,
+> the header and footer marks, the 404 caesura, the notated empty state, the
+> roman-numeral section counters, the double-bar rules, the raised initial, and
+> the photograph's tint have all been removed, and the empty-state component has
+> been deleted. What remains is type, hairline rules, and content. The brief
+> below is kept as the record of what was asked for and built first; read it as
+> history, not as instructions.
+
 You own the frontend of this site: the design system, every layout, every
 component, and all CSS. The content layer is already built and is not yours to
 change. This document is the contract between the two.
@@ -158,12 +167,10 @@ is still choosing which projects and pieces to publish.
 
 ## Empty states are a primary deliverable
 
-**Superseded as of 14 September 2026.** Stephen asked for empty sections to be
-hidden for now, so a section with no entries is omitted from its page and the
-empty-state component is not currently rendered anywhere. The component and its
-copy are still in the repository, and the requirements below still apply on the
-day a section is shown empty again. The rest of this section is kept as the
-record of what was designed and why.
+**Superseded as of 14 September 2026.** A section with no entries is omitted
+from its page, and the empty-state component has since been deleted along with
+the rest of the decorative work. The rest of this section is kept as the record
+of what was designed and why.
 
 Two of the four pages will ship with nothing in them. Getting that right is the
 main design problem here, not an edge case to handle at the end.

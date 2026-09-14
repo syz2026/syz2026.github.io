@@ -6,10 +6,6 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <svg class="end-mark" viewBox="0 0 36 18" aria-hidden="true" focusable="false">
-      <line x1="14" y1="1" x2="14" y2="17"></line>
-      <rect x="19" y="1" width="3.4" height="16"></rect>
-    </svg>
     {
       /* The spaces are explicit because the template collapses whitespace
         across a line break, and they are real text rather than CSS margin so
@@ -24,13 +20,8 @@ const year = new Date().getFullYear();
 </footer>
 
 <style>
-  /* The page's last system closes here on the final barline rather than on a
-     hairline, so a list or a rest measure is never left open at the end of a
-     page. The end mark below then restates the close, the way a printed
-     score does. */
   .site-footer {
-    border-top: 3px solid var(--ink);
-    margin-top: 4px;
+    border-top: 1px solid var(--line-strong);
   }
 
   .footer-inner {
@@ -46,20 +37,6 @@ const year = new Date().getFullYear();
 
   /* The final barline: every page of the site ends on a light-heavy bar,
      the way a movement ends. */
-  .end-mark {
-    width: 1.55rem;
-    height: auto;
-  }
-
-  .end-mark line {
-    stroke: var(--ink-2);
-    stroke-width: 1;
-  }
-
-  .end-mark rect {
-    fill: var(--ink);
-  }
-
   .footer-note {
     font-family: var(--font-sans);
     font-size: 0.8rem;

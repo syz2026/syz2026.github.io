@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HarmonicSeries from '../components/HarmonicSeries.astro';
 import { profile } from '../data/profile';
 import { pages, ui } from '../data/pages';
 ---
@@ -10,11 +9,6 @@ import { pages, ui } from '../data/pages';
     <h1 class="name">{profile.name}</h1>
     <p class="tagline">{profile.tagline}</p>
   </header>
-
-  <figure class="harmonic-figure">
-    <HarmonicSeries />
-    <figcaption class="harmonic-caption">{pages.home.harmonicCaption}</figcaption>
-  </figure>
 
   <figure class="headshot">
     <img src={profile.headshot} alt={ui.headshotAlt} width="759" height="800" decoding="async" />
@@ -42,11 +36,9 @@ import { pages, ui } from '../data/pages';
 </BaseLayout>
 
 <style>
-  /* The home page is the title page of the score: the name set in the
-     engraved display face, the tagline as a dedication, and the harmonic
-     series stated as the theme before the prose begins. */
   .home-head {
     text-align: center;
+    margin-bottom: 2.75rem;
   }
 
   .name {
@@ -65,33 +57,13 @@ import { pages, ui } from '../data/pages';
     color: var(--ink-2);
   }
 
-  /* The caption is the figure's accessible name and states the theme in
-     words, so the idea survives for anyone who cannot see the drawing. */
-  .harmonic-figure {
-    margin: 0 0 1.6rem;
-  }
-
-  .harmonic-caption {
-    max-width: var(--prose-max);
-    margin: 0 auto;
-    text-align: center;
-    font-style: italic;
-    font-size: 0.92rem;
-    line-height: 1.5;
-    color: var(--ink-2);
-  }
-
   .headshot {
-    margin: 0.25rem auto 0.5rem;
+    margin: 0 auto 1.25rem;
     max-width: 14rem;
   }
 
   .headshot img {
-    padding: 0.45rem;
-    background: var(--paper-raised);
     border: 1px solid var(--line-strong);
-    box-shadow: 0 0 0 1px var(--line);
-    filter: saturate(0.86) sepia(0.1) contrast(0.98);
   }
 
   .bio {
@@ -106,19 +78,6 @@ import { pages, ui } from '../data/pages';
     margin-top: 0.25rem;
   }
 
-  /* A raised initial rather than a dropped one. A drop cap has to cut a
-     rectangular column out of the text, which a narrow glyph cannot do, and
-     the bio happens to open on "I". Setting the initial on the baseline works
-     for any letter, so the opening sentence can be rewritten freely. */
-  .bio p:first-of-type::first-letter {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 2.15em;
-    line-height: 1;
-    padding-right: 0.04em;
-    color: var(--accent);
-  }
-
   .contact-links {
     clear: both;
     list-style: none;
@@ -127,7 +86,7 @@ import { pages, ui } from '../data/pages';
     gap: 0.5rem 1.6rem;
     margin: 2.25rem 0 0;
     padding: 1.4rem 0 0;
-    border-top: 3px double var(--line-strong);
+    border-top: 1px solid var(--line-strong);
   }
 
   .contact-links a {
@@ -140,12 +99,6 @@ import { pages, ui } from '../data/pages';
       float: right;
       margin: 0.25rem 0 1.25rem 2rem;
       width: 12rem;
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .headshot img {
-      filter: saturate(0.82) sepia(0.08) brightness(0.94);
     }
   }
 </style>

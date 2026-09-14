@@ -203,10 +203,6 @@ a:hover {
 
 /* ==========================================================================
    Page titles and section headings
-
-   The page title is set in the engraved display face. Section headings are
-   numbered like movements (CSS counters, upper-roman) and ruled off to the
-   right, the way movement titles are set in a printed score.
    ========================================================================== */
 
 .page-title {
@@ -225,19 +221,11 @@ a:hover {
   color: var(--ink-2);
 }
 
-main {
-  counter-reset: section;
-}
-
 .section {
-  counter-increment: section;
   margin-top: 3.5rem;
 }
 
 .section > h2 {
-  display: flex;
-  align-items: baseline;
-  gap: 0.9rem;
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -245,83 +233,21 @@ main {
   color: var(--ink);
 }
 
-.section > h2::before {
-  content: counter(section, upper-roman) '.';
-  min-width: 2.4rem;
-  color: var(--accent);
-  font-weight: 500;
-  letter-spacing: 0.06em;
-}
-
-.section > h2::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--line-strong);
-  transform: translateY(-0.28em);
-}
-
-/* The heading already speaks one score dialect, the movement numeral. The
-   hairline trailing into the list's double bar stacked a second dialect on
-   top, so it steps back on narrow screens where the two sit closest. */
-@media (max-width: 39.99rem) {
-  .section > h2::after {
-    content: none;
-  }
-}
-
-/* Sections rise faintly as they enter, where scroll-driven animation is
-   supported. Without support or under reduced motion they render static. */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .section > h2 {
-      animation-name: section-in;
-      animation-duration: 1s; /* nominal duration; the view() timeline drives progress */
-      animation-fill-mode: both;
-      animation-timing-function: linear;
-      animation-timeline: view();
-      animation-range: entry 0% entry 55%;
-    }
-  }
-}
-
-/* Transform only, deliberately. Animating opacity from 0 on a scroll timeline
-   risks leaving a heading invisible whenever the timeline is inactive, which
-   happens on a page too short to scroll and when printing. The worst case here
-   is a heading sitting 7px low, which nobody will notice. */
-@keyframes section-in {
-  from {
-    transform: translateY(7px);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
 /* ==========================================================================
    Shared primitives
 
-   The site renders almost everything as ruled rows rather than boxed
-   cards. In this design those rows are measures: a list opens on a double
-   bar and closes on a final barline (light-heavy), the way a movement
-   ends. The "entry" pattern (a list item with a header row, meta line,
-   and optional summary) is shared by publications, research, software,
-   works, positions, and awards.
+   The site renders almost everything as ruled rows rather than boxed cards.
+   The "entry" pattern (a list item with a header row, meta line, and
+   optional summary) is shared by publications, research, software, works,
+   positions, and awards.
    ========================================================================== */
 
 .entries {
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 3px double var(--line-strong);
-}
-
-/* The final barline closing every list. */
-.entries::after {
-  content: '';
-  display: block;
-  margin-top: 4px;
-  border-top: 3px solid var(--ink);
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
 }
 
 .entry {
@@ -507,8 +433,7 @@ main {
 
    The reading size steps down with the page so lines stay near a readable
    measure, meta lines relax, and dates may wrap at their separator instead
-   of standing stranded on a row of their own. The figure's own narrow
-   arrangement lives in HarmonicSeries.astro.
+   of standing stranded on a row of their own.
    ========================================================================== */
 
 @media (max-width: 39.99rem) {

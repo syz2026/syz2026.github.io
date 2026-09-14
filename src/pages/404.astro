@@ -5,10 +5,6 @@ import { pages } from '../data/pages';
 
 <BaseLayout title={pages.notFound.title} description={pages.notFound.description} noindex>
   <div class="not-found">
-    <svg class="caesura" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
-      <path d="M16 6 L11 34"></path>
-      <path d="M29 6 L24 34"></path>
-    </svg>
     <h1 class="page-title">{pages.notFound.title}</h1>
     <p class="body">{pages.notFound.body}</p>
     <p class="home-row">
@@ -18,27 +14,9 @@ import { pages } from '../data/pages';
 </BaseLayout>
 
 <style>
-  /* A missing page is a caesura: the two slanted strokes players know as
-     railroad tracks, a sudden stop in the music. */
   .not-found {
     text-align: center;
     padding-top: 1.5rem;
-  }
-
-  /* Stroke weight matches the stems in the harmonic figure, about 1.5px once
-     the viewBox scales to the rendered width; the old 3px strokes outweighed
-     the footer's end mark. */
-  .caesura {
-    width: 2.35rem;
-    height: auto;
-    margin-bottom: 1.4rem;
-  }
-
-  .caesura path {
-    stroke: var(--accent);
-    stroke-width: 1.6;
-    stroke-linecap: round;
-    fill: none;
   }
 
   .body {

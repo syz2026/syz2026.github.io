@@ -20,8 +20,6 @@ export const pages = {
     title: 'Stephen Zhang',
     description:
       'Stephen Zhang, undergraduate in mathematics and computer science at Stanford. Research on gene-culture coevolution and language model measurement, and original composition.',
-    harmonicCaption:
-      'The harmonic series, which is both the integers and the notes an open brass instrument plays. Each stem stands at one over its partial number, and the ratio between neighbouring partials is labelled.',
     contactHeading: 'Contact and links',
   },
   research: {
@@ -36,13 +34,6 @@ export const pages = {
     },
     independentHeading: 'Independent projects',
     softwareHeading: 'Software',
-    /* A section with no entries is omitted rather than given an empty state,
-       so these two strings are unused. They are kept because the decision is
-       "for now": adding the first entry back should not also mean rewriting
-       the copy. Same for `music.empty` below. */
-    independentEmpty:
-      'No independent projects are listed yet. I am still deciding which of them are ready to show.',
-    softwareEmpty: 'No software projects are listed yet.',
     linkLabels: {
       paper: 'Paper',
       preprint: 'Preprint',
@@ -64,7 +55,6 @@ export const pages = {
     description: 'Original compositions by Stephen Zhang, with scores and recordings.',
     intro:
       'I compose for orchestra and for smaller ensembles, and I play trumpet. Scores and recordings go here as pieces are finished, and the recordings are synthesized from the notation rather than performed.',
-    empty: 'No works are listed yet. I am choosing which pieces are ready to publish.',
     worksHeading: 'Works',
     inProgressLabel: 'In progress',
     recordingLabel: 'Recording',
