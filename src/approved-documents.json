@@ -7,6 +7,12 @@
       "reviewed": "2026-08-12",
       "checkedFor": "phone number, street address",
       "note": "Rebuilt from the LaTeX source with the phone line removed. Header reads email and city only. One page, content otherwise identical to the application version."
+    },
+    "media/scores/concert-symphony-iii.pdf": {
+      "sha256": "06ed0a97e2c52317c4d79e8c8d482a81e11cf1d93ef972103b0ff9b69fe5313d",
+      "reviewed": "2026-09-14",
+      "checkedFor": "phone number, street address, email address, filesystem paths, embedded metadata",
+      "note": "Full orchestral score, 48 pages, exported from MuseScore. Every word of extracted text is either a tempo or playing indication, an instrument name, the work title, or the composer credit. XMP carries the title and the MuseScore version and nothing else."
     }
   }
 }

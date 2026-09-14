@@ -68,7 +68,7 @@ Folder: `src/content/music/`. One file per work, for example
 | `title`           | yes      |                                                                      |
 | `year`            | yes      | Integer                                                              |
 | `instrumentation` | yes      | Free text, for example `Orchestra`                                   |
-| `blurb`           | yes      | One or two sentences for the card                                    |
+| `blurb`           | yes      | One or two sentences for the card. Fold with `>-`, see below         |
 | `duration`        | no       | For example `9:56`                                                   |
 | `movements`       | no       | Array of `{ title, duration }`, titles unnumbered, see below         |
 | `audio`           | no       | Path under `public/`, for example `/media/audio/final-struggle.mp3`  |
@@ -81,6 +81,10 @@ Movement titles must not carry their own numbers. The page numbers them in roman
 as it lists them, so a title of `"I. Andante sostenuto"` renders as "I. I.
 Andante sostenuto". Write `"Andante sostenuto"` and let the page number it.
 
+The blurb becomes the page's `<meta name="description">`, so fold it with `>-`
+rather than `>`. A plain `>` keeps a trailing newline, which then sits inside
+the attribute value in the built HTML.
+
 An audio player appears only when `audio` is set, and a score link only when
 `score` is set. A work with neither still renders as a text entry, so pieces
 that exist only as scores in progress can be listed.
@@ -91,7 +95,7 @@ title: 'The Final Struggle'
 year: 2026
 instrumentation: 'Orchestra'
 duration: '9:56'
-blurb: >
+blurb: >-
   An orchestral piece in one movement, grown from a 48-bar sketch to 254 bars.
 audio: /media/audio/the-final-struggle.mp3
 score: /media/scores/the-final-struggle.pdf
