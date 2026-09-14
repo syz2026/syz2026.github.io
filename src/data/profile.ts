@@ -16,9 +16,10 @@ export const profile = {
     { label: 'Hugging Face', href: 'https://huggingface.co/SYZ-Alpha' },
   ],
   bio: [
-    'I am an undergraduate at Stanford studying mathematics and computer science, with a music minor in trumpet performance.',
-    'In the Feldman Lab I build stochastic and agent-based models of gene-culture coevolution, and derive analytical results that get validated against simulation. That work produced a paper in Theoretical Population Biology in 2025 and a second manuscript is under review. Outside the lab I run small preregistered experiments on language models, where the question is usually whether an effect survives the controls that were fixed before the number was known.',
-    'I play trumpet and compose for orchestra, and I serve as Financial Officer of Stanford Orchestras with a budget of more than $40,000.',
+    'I am an undergraduate at Stanford studying mathematics and computer science, with a minor in music for trumpet performance. I expect to graduate in June 2029.',
+    'Since 2023 I have worked in the Feldman Lab in Stanford\u2019s biology department, where I build stochastic, agent-based, and equation-based models of gene-culture coevolution in Python and derive analytical results that are then checked against simulation. That work produced a paper in Theoretical Population Biology in 2025, and a second manuscript is under review.',
+    'The engineering happens elsewhere. At Alpha AI Engineering I fine-tuned a sub-billion-parameter language model with LoRA and graded its output by execution rather than by model scoring, ran transformer pretraining sweeps on a SLURM cluster, modified the Rust scheduling backend of an Anki fork, and built full-stack applications in TypeScript, React, and Firebase. At EquityBound I analyze small and medium enterprise valuations and audit the codebase that produces them.',
+    'I play trumpet and compose for orchestra. I am a Fellow of the Royal Schools of Music in trumpet performance, and I serve as Financial Officer of Stanford Orchestras, where I manage a budget of more than $40,000.',
   ],
 } as const;
 
