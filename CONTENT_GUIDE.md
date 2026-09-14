@@ -1,9 +1,12 @@
 # Adding entries
 
-The research, music, and software sections ship empty. Each entry is one
-Markdown file: frontmatter carries the structured fields, and the body carries
-the prose. Drop a file in the right folder and it appears. Nothing else needs
-editing.
+Each entry is one Markdown file: frontmatter carries the structured fields, and
+the body carries the prose. Drop a file in the right folder and it appears.
+Nothing else needs editing. A section with no entries is left off its page
+entirely, so adding the first file is also what makes the section appear.
+
+The body is optional. An entry with frontmatter and nothing after it renders as
+a clean entry page with no prose block.
 
 Set `draft: true` on anything unfinished. Drafts show up in `npm run dev` so you
 can see how they render, and they are dropped from the built site, so a

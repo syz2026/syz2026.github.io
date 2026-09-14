@@ -46,9 +46,9 @@ software each live as one Markdown file in `src/content/`, with frontmatter
 validated against the schemas in `src/content.config.ts`. A malformed entry
 fails the build with a message naming the field.
 
-The three collections are currently empty on purpose, so `/music` and parts of
-`/research` render designed empty states. Adding the first file to a folder is
-all it takes for that section to populate.
+A section with no entries is omitted from its page rather than shown with an
+empty state, so `/research` is publications-only until the first project lands.
+Adding the first file to a folder is all it takes for that section to appear.
 
 ## Security
 

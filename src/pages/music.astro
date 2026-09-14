@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHead from '../components/PageHead.astro';
 import MusicCard from '../components/MusicCard.astro';
-import EmptyState from '../components/EmptyState.astro';
 import { pages } from '../data/pages';
 import { getMusic } from '../lib/collections';
 
@@ -12,20 +11,18 @@ const works = await getMusic();
 <BaseLayout title={pages.music.title} description={pages.music.description}>
   <PageHead title={pages.music.title} lede={pages.music.intro} />
 
-  <section class="section" aria-labelledby="works-heading">
-    <h2 id="works-heading">{pages.music.worksHeading}</h2>
-    {
-      works.length > 0 ? (
+  {
+    works.length > 0 && (
+      <section class="section" aria-labelledby="works-heading">
+        <h2 id="works-heading">{pages.music.worksHeading}</h2>
         <ul class="entries">
           {works.map((entry) => (
             <MusicCard entry={entry} />
           ))}
         </ul>
-      ) : (
-        <EmptyState text={pages.music.empty} />
-      )
-    }
-  </section>
+      </section>
+    )
+  }
 </BaseLayout>
 
 <style>

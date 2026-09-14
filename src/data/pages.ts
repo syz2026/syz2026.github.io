@@ -28,16 +28,20 @@ export const pages = {
     title: 'Research',
     description: 'Peer-reviewed publications and independent research projects by Stephen Zhang.',
     intro:
-      'Published work comes first, and independent projects follow. Every entry carries its real status, because most of that work is complete but unsubmitted and listing it beside a journal paper without that label would probably overstate it.',
+      'Published work, with each entry labelled by the kind of venue it appeared in, because a magazine article and a peer-reviewed paper should not be read as the same thing.',
     publicationsHeading: 'Publications',
     kindLabels: {
       'peer-reviewed': 'Peer reviewed',
       magazine: 'Magazine article',
     },
     independentHeading: 'Independent projects',
+    softwareHeading: 'Software',
+    /* A section with no entries is omitted rather than given an empty state,
+       so these two strings are unused. They are kept because the decision is
+       "for now": adding the first entry back should not also mean rewriting
+       the copy. Same for `music.empty` below. */
     independentEmpty:
       'No independent projects are listed yet. I am still deciding which of them are ready to show.',
-    softwareHeading: 'Software',
     softwareEmpty: 'No software projects are listed yet.',
     linkLabels: {
       paper: 'Paper',

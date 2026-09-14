@@ -158,6 +158,13 @@ is still choosing which projects and pieces to publish.
 
 ## Empty states are a primary deliverable
 
+**Superseded as of 14 September 2026.** Stephen asked for empty sections to be
+hidden for now, so a section with no entries is omitted from its page and the
+empty-state component is not currently rendered anywhere. The component and its
+copy are still in the repository, and the requirements below still apply on the
+day a section is shown empty again. The rest of this section is kept as the
+record of what was designed and why.
+
 Two of the four pages will ship with nothing in them. Getting that right is the
 main design problem here, not an edge case to handle at the end.
 
@@ -171,15 +178,15 @@ because entries will arrive gradually.
 
 ## Pages to build
 
-| Route            | File                               | Contents                                                                                                  |
-| ---------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `/`              | `src/pages/index.astro`            | Name, tagline, headshot, `profile.bio` paragraphs, `profile.links`                                        |
-| `/research`      | `src/pages/research.astro`         | `pages.research.intro`, then Publications (populated), Independent projects (empty), Software (empty)     |
-| `/music`         | `src/pages/music.astro`            | `pages.music.intro`, then the works list (empty)                                                          |
-| `/cv`            | `src/pages/cv.astro`               | Education, Experience, Research, Publications, Activities, Awards, Skills, and a link to `profile.resume` |
-| `/research/[id]` | `src/pages/research/[...id].astro` | One research entry with its rendered body                                                                 |
-| `/music/[id]`    | `src/pages/music/[...id].astro`    | One work with audio, score link, movements, and body                                                      |
-| 404              | `src/pages/404.astro`              | Simple, in keeping                                                                                        |
+| Route            | File                               | Contents                                                                                                   |
+| ---------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `/`              | `src/pages/index.astro`            | Name, tagline, headshot, `profile.bio` paragraphs, `profile.links`                                         |
+| `/research`      | `src/pages/research.astro`         | `pages.research.intro`, then Publications. Independent projects and Software appear once they have entries |
+| `/music`         | `src/pages/music.astro`            | `pages.music.intro`, then the works list                                                                   |
+| `/cv`            | `src/pages/cv.astro`               | Education, Experience, Research, Publications, Activities, Awards, Skills, and a link to `profile.resume`  |
+| `/research/[id]` | `src/pages/research/[...id].astro` | One research entry with its rendered body                                                                  |
+| `/music/[id]`    | `src/pages/music/[...id].astro`    | One work with audio, score link, movements, and body                                                       |
+| 404              | `src/pages/404.astro`              | Simple, in keeping                                                                                         |
 
 Dynamic routes need `getStaticPaths`. With empty collections they generate no
 pages, which is correct and must not error the build.

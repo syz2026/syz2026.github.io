@@ -20,6 +20,8 @@ interface Props {
 const { entry } = Astro.props as Props;
 const { title, status, year, question, summary, tags, links } = entry.data;
 const { Content } = await render(entry);
+// Same guard as the music entry page: no body, no rule.
+const hasBody = (entry.body ?? '').trim().length > 0;
 
 const linkEntries = (links ? Object.entries(links) : []) as [
   keyof typeof pages.research.linkLabels,
@@ -65,9 +67,13 @@ const linkEntries = (links ? Object.entries(links) : []) as [
 
     <p class="summary-lede">{summary}</p>
 
-    <div class="prose">
-      <Content />
-    </div>
+    {
+      hasBody && (
+        <div class="prose">
+          <Content />
+        </div>
+      )
+    }
   </article>
 </BaseLayout>
 

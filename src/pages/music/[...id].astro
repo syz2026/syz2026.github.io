@@ -22,6 +22,9 @@ const { entry } = Astro.props as Props;
 const { title, year, instrumentation, duration, blurb, movements, audio, score, status } =
   entry.data;
 const { Content } = await render(entry);
+// An entry without a program note would otherwise draw the prose block's rule
+// across the page with nothing under it.
+const hasNote = (entry.body ?? '').trim().length > 0;
 ---
 
 <BaseLayout title={title} description={blurb} ogType="article">
@@ -77,9 +80,13 @@ const { Content } = await render(entry);
       )
     }
 
-    <div class="prose">
-      <Content />
-    </div>
+    {
+      hasNote && (
+        <div class="prose">
+          <Content />
+        </div>
+      )
+    }
   </article>
 </BaseLayout>
 

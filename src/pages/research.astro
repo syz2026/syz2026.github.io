@@ -4,7 +4,6 @@ import PageHead from '../components/PageHead.astro';
 import PublicationList from '../components/PublicationList.astro';
 import ResearchCard from '../components/ResearchCard.astro';
 import SoftwareCard from '../components/SoftwareCard.astro';
-import EmptyState from '../components/EmptyState.astro';
 import { publications } from '../data/publications';
 import { pages } from '../data/pages';
 import { getResearch, getSoftware } from '../lib/collections';
@@ -21,35 +20,31 @@ const software = await getSoftware();
     <PublicationList items={publications} />
   </section>
 
-  <section class="section" aria-labelledby="independent-heading">
-    <h2 id="independent-heading">{pages.research.independentHeading}</h2>
-    {
-      research.length > 0 ? (
+  {
+    research.length > 0 && (
+      <section class="section" aria-labelledby="independent-heading">
+        <h2 id="independent-heading">{pages.research.independentHeading}</h2>
         <ul class="entries">
           {research.map((entry) => (
             <ResearchCard entry={entry} />
           ))}
         </ul>
-      ) : (
-        <EmptyState text={pages.research.independentEmpty} />
-      )
-    }
-  </section>
+      </section>
+    )
+  }
 
-  <section class="section" aria-labelledby="software-heading">
-    <h2 id="software-heading">{pages.research.softwareHeading}</h2>
-    {
-      software.length > 0 ? (
+  {
+    software.length > 0 && (
+      <section class="section" aria-labelledby="software-heading">
+        <h2 id="software-heading">{pages.research.softwareHeading}</h2>
         <ul class="entries">
           {software.map((entry) => (
             <SoftwareCard entry={entry} />
           ))}
         </ul>
-      ) : (
-        <EmptyState text={pages.research.softwareEmpty} variant="quiet" />
-      )
-    }
-  </section>
+      </section>
+    )
+  }
 </BaseLayout>
 
 <style>
