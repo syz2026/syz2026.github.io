@@ -19,14 +19,14 @@ export const pages = {
   home: {
     title: 'Stephen Zhang',
     description:
-      'Stephen Zhang, undergraduate in mathematics and computer science at Stanford. Research on gene-culture coevolution and language model measurement, and original composition.',
+      'Stephen Zhang, undergraduate in mathematics and computer science at Stanford. Research on gene-culture coevolution and composition for orchestra.',
     contactHeading: 'Contact and links',
   },
   research: {
     title: 'Research',
-    description: 'Peer-reviewed publications and independent research projects by Stephen Zhang.',
-    intro:
-      'Published work, with each entry labelled by the kind of venue it appeared in, because a magazine article and a peer-reviewed paper should not be read as the same thing.',
+    description:
+      'Published work by Stephen Zhang: a peer-reviewed paper on gene-culture coevolution, and a magazine article on a combinatorics problem.',
+    intro: 'Published work, labelled by the kind of venue it appeared in.',
     publicationsHeading: 'Publications',
     kindLabels: {
       'peer-reviewed': 'Peer reviewed',
@@ -54,7 +54,7 @@ export const pages = {
     title: 'Music',
     description: 'Original compositions by Stephen Zhang, with scores and recordings.',
     intro:
-      'I compose for orchestra and for smaller ensembles, and I play trumpet. Scores and recordings go here as pieces are finished, and the recordings are synthesized from the notation rather than performed.',
+      'I compose for orchestra and for smaller ensembles, and I play trumpet. Scores and recordings go up here as pieces are finished. The recordings are synthesized from the notation rather than performed.',
     worksHeading: 'Works',
     inProgressLabel: 'In progress',
     recordingLabel: 'Recording',
@@ -84,7 +84,7 @@ export const pages = {
   notFound: {
     title: 'Page not found',
     description: 'The requested page does not exist on this site.',
-    body: 'There is nothing at this address. If you followed a link to get here, it is probably out of date.',
+    body: 'There’s nothing at this address. If you followed a link to get here, it’s probably out of date.',
     homeLabel: 'Return to the home page',
   },
 } as const;
