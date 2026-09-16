@@ -3,10 +3,10 @@
   "howToUpdate": "Open the new file, read it, confirm it carries no phone number, street address, or anything else that should not be public, then run: shasum -a 256 public/media/<file> and paste the hash here with today's date. Updating the hash without reading the document defeats the point of the check.",
   "documents": {
     "media/stephen-zhang-resume.pdf": {
-      "sha256": "1d5004c24f09506a9e54375e371762605536369273eb84b25551d38ed7fd9093",
-      "reviewed": "2026-08-12",
+      "sha256": "65427fd9073b0af334c0cd9d9f02ec98e4df73cde4fcebe34233bd0b53b282fd",
+      "reviewed": "2026-09-16",
       "checkedFor": "phone number, street address",
-      "note": "Rebuilt from the LaTeX source with the phone line removed. Header reads email and city only. One page, content otherwise identical to the application version."
+      "note": "Rebuilt from the LaTeX source with the phone line removed. Header reads email and city only. One page, content otherwise identical to the application version. Regenerated 2026-09-16 with tectonic after the Alpha AI bullet changed to multi-billion-parameter. Extracted text and a raw byte scan both show no phone number and no filesystem path; XMP carries title, author, and subject only."
     },
     "media/scores/concert-symphony-iii.pdf": {
       "sha256": "06ed0a97e2c52317c4d79e8c8d482a81e11cf1d93ef972103b0ff9b69fe5313d",
