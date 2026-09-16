@@ -16,10 +16,10 @@ export const profile = {
     { label: 'Hugging Face', href: 'https://huggingface.co/SYZ-Alpha' },
   ],
   bio: [
-    'I study mathematics and computer science at Stanford, with a minor in music (trumpet performance). I graduate in June 2029.',
+    'I study mathematics and computer science at Stanford, with a minor in music (trumpet performance). I graduate in June 2028.',
     'I have worked in the Feldman Lab in Stanford’s biology department since 2023. I build stochastic, agent-based, and equation-based models of gene-culture coevolution in Python. I check the analytical results against simulation. The work produced a paper in Theoretical Population Biology in 2025. A second manuscript is under review.',
-    'At Alpha AI Engineering, I fine-tuned a sub-billion-parameter language model with LoRA and graded the output by execution rather than by model scoring. I ran transformer pretraining sweeps on a SLURM cluster, modified the Rust scheduling backend of an Anki fork, and built full-stack applications in TypeScript, React, and Firebase.',
-    'At EquityBound, I analyze valuations of small and medium enterprises and audit the codebase behind them.',
+    'At Alpha AI Engineering, I fine-tuned a sub-billion-parameter language model with LoRA. I also ran transformer pretraining sweeps on a SLURM cluster.',
+    'At EquityBound, I analyzed valuations of small and medium enterprises and audited the codebase behind them.',
     'I play trumpet and compose for orchestra. I am a Fellow of the Royal Schools of Music in trumpet performance. As Financial Officer of Stanford Orchestras, I manage a budget of more than $40,000.',
   ],
 } as const;
@@ -28,7 +28,7 @@ export const education = {
   school: 'Stanford University',
   location: 'Stanford, CA',
   degree: 'Bachelor of Science in Mathematics and Computer Science',
-  graduation: 'June 2029',
+  graduation: 'June 2028',
   minor: 'Music (Trumpet Performance)',
   coursework: [
     'Partial and Stochastic Differential Equations',
@@ -73,11 +73,8 @@ export const experience: Position[] = [
     start: 'June 2026',
     end: 'August 2026',
     bullets: [
-      'Built full-stack web applications in TypeScript, React, and Firebase, using Firestore, Cloud Functions, object storage, and federated authentication',
-      'Modified the Rust scheduling backend of an Anki fork, adding a SvelteKit interface, a self-hosted sync server, and an Android build',
-      'Fine-tuned a sub-1B-parameter language model with LoRA, using staged supervised fine-tuning and direct preference optimization',
-      'Graded model output by execution rather than by model scoring',
-      'Ran transformer pretraining sweeps on a SLURM cluster in PyTorch, covering corpus generation, checkpointing, and evaluation harnesses',
+      'Fine-tuned a sub-1B-parameter language model with LoRA',
+      'Ran transformer pretraining sweeps on a SLURM cluster in PyTorch',
     ],
   },
   {
@@ -87,9 +84,9 @@ export const experience: Position[] = [
     start: 'January 2026',
     end: 'Present',
     bullets: [
-      'Analyze valuations of small and medium enterprises using standard financial methods',
-      'Propose and implement service improvements with the engineering team',
-      'Audit the codebase and find accuracy and performance gains',
+      'Analyzed valuations of small and medium enterprises using standard financial methods',
+      'Proposed and implemented service improvements with the engineering team',
+      'Audited the codebase and found accuracy and performance gains',
     ],
   },
 ];
