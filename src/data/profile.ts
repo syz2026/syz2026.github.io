@@ -16,10 +16,11 @@ export const profile = {
     { label: 'Hugging Face', href: 'https://huggingface.co/SYZ-Alpha' },
   ],
   bio: [
-    'I\u2019m an undergraduate at Stanford studying mathematics and computer science, with a minor in music (trumpet performance). I graduate in June 2029.',
-    'Since 2023 I\u2019ve worked in the Feldman Lab in Stanford\u2019s biology department. I build stochastic, agent-based, and equation-based models of gene-culture coevolution in Python, and check the analytical results against simulation. That work led to a paper in Theoretical Population Biology in 2025; a second manuscript is under review.',
-    'At Alpha AI Engineering, I fine-tuned a sub-billion-parameter language model with LoRA and graded its output by execution rather than by model scoring. I also ran transformer pretraining sweeps on a SLURM cluster, modified the Rust scheduling backend of an Anki fork, and built full-stack applications in TypeScript, React, and Firebase. At EquityBound, I analyze small and medium enterprise valuations and audit the codebase that produces them.',
-    'I play trumpet and compose for orchestra. I\u2019m a Fellow of the Royal Schools of Music in trumpet performance, and I serve as Financial Officer of Stanford Orchestras, managing a budget of more than $40,000.',
+    'I study mathematics and computer science at Stanford, with a minor in music (trumpet performance). I graduate in June 2029.',
+    'I have worked in the Feldman Lab in Stanford’s biology department since 2023. I build stochastic, agent-based, and equation-based models of gene-culture coevolution in Python. I check the analytical results against simulation. The work produced a paper in Theoretical Population Biology in 2025. A second manuscript is under review.',
+    'At Alpha AI Engineering, I fine-tuned a sub-billion-parameter language model with LoRA and graded the output by execution rather than by model scoring. I ran transformer pretraining sweeps on a SLURM cluster, modified the Rust scheduling backend of an Anki fork, and built full-stack applications in TypeScript, React, and Firebase.',
+    'At EquityBound, I analyze valuations of small and medium enterprises and audit the codebase behind them.',
+    'I play trumpet and compose for orchestra. I am a Fellow of the Royal Schools of Music in trumpet performance. As Financial Officer of Stanford Orchestras, I manage a budget of more than $40,000.',
   ],
 } as const;
 
@@ -57,9 +58,9 @@ export const research: Position[] = [
     start: 'June 2023',
     end: 'Present',
     bullets: [
-      'Develop and analyze stochastic, agent-based, and equation-based models of gene-culture coevolution using Python (NumPy, SciPy, Matplotlib)',
-      'Derive and validate analytical results against simulations',
-      'Published one peer-reviewed paper, with an additional manuscript under review',
+      'Build stochastic, agent-based, and equation-based models of gene-culture coevolution in Python (NumPy, SciPy, Matplotlib)',
+      'Derive analytical results and validate them against simulation',
+      'Published one peer-reviewed paper, with a second manuscript under review',
     ],
   },
 ];
@@ -74,7 +75,8 @@ export const experience: Position[] = [
     bullets: [
       'Built full-stack web applications in TypeScript, React, and Firebase, using Firestore, Cloud Functions, object storage, and federated authentication',
       'Modified the Rust scheduling backend of an Anki fork, adding a SvelteKit interface, a self-hosted sync server, and an Android build',
-      'Fine-tuned a sub-1B-parameter language model with LoRA, using staged supervised fine-tuning and direct preference optimization, and graded its output by execution rather than by model scoring',
+      'Fine-tuned a sub-1B-parameter language model with LoRA, using staged supervised fine-tuning and direct preference optimization',
+      'Graded model output by execution rather than by model scoring',
       'Ran transformer pretraining sweeps on a SLURM cluster in PyTorch, covering corpus generation, checkpointing, and evaluation harnesses',
     ],
   },
@@ -85,9 +87,9 @@ export const experience: Position[] = [
     start: 'January 2026',
     end: 'Present',
     bullets: [
-      'Analyze small and medium enterprise valuations using standard financial methods',
-      'Propose and implement service enhancements with the engineering team',
-      'Audit the codebase and identify accuracy and performance improvements',
+      'Analyze valuations of small and medium enterprises using standard financial methods',
+      'Propose and implement service improvements with the engineering team',
+      'Audit the codebase and find accuracy and performance gains',
     ],
   },
 ];
@@ -100,8 +102,8 @@ export const activities: Position[] = [
     start: 'September 2025',
     end: 'Present',
     bullets: [
-      'Oversee orchestra activities as a member of the executive committee with the co-presidents and vice president',
-      'Manage a budget of more than $40K, ensuring all events have funding and limiting excess spending',
+      'Serve on the executive committee with the co-presidents and vice president',
+      'Manage a budget of more than $40K, funding every event and limiting excess spending',
     ],
   },
 ];
@@ -109,7 +111,7 @@ export const activities: Position[] = [
 export const awards = [
   { title: 'Stanford Math Tournament, Distinguished Honorable Mention (Top 10%)', year: '2024' },
   { title: 'USA Physics Olympiad Semifinalist (Top 400 in U.S.)', year: '2022' },
-  { title: '5x AIME Qualifier', year: '2020\u20132025' },
+  { title: '5x AIME Qualifier', year: '2020–2025' },
   { title: 'Fellow of the Royal Schools of Music in Trumpet Performance', year: '2025' },
   { title: 'CLASS National Chinese Essay Contest Gold Prize', year: '2023' },
 ] as const;

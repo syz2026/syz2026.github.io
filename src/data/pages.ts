@@ -19,18 +19,19 @@ export const pages = {
   home: {
     title: 'Stephen Zhang',
     description:
-      'Stephen Zhang, undergraduate in mathematics and computer science at Stanford. Research on gene-culture coevolution and composition for orchestra.',
+      'Stephen Zhang studies mathematics and computer science at Stanford. He models gene-culture coevolution and composes for orchestra.',
     contactHeading: 'Contact and links',
   },
   research: {
     title: 'Research',
     description:
-      'Published work by Stephen Zhang: a peer-reviewed paper on gene-culture coevolution, and a magazine article on a combinatorics problem.',
-    intro: 'Published work, labelled by the kind of venue it appeared in.',
+      'Publications by Stephen Zhang: a peer-reviewed paper on gene-culture coevolution, a magazine article on combinatorics, and a paper under review at ICLR 2027.',
+    intro: 'Published and submitted work. Each entry names the venue and its review status.',
     publicationsHeading: 'Publications',
     kindLabels: {
       'peer-reviewed': 'Peer reviewed',
       magazine: 'Magazine article',
+      'in-submission': 'In submission',
     },
     independentHeading: 'Independent projects',
     softwareHeading: 'Software',
@@ -54,7 +55,7 @@ export const pages = {
     title: 'Music',
     description: 'Original compositions by Stephen Zhang, with scores and recordings.',
     intro:
-      'I compose for orchestra and for smaller ensembles, and I play trumpet. Scores and recordings go up here as pieces are finished. The recordings are synthesized from the notation rather than performed.',
+      'I compose for orchestra and smaller ensembles, and I play trumpet. Scores and recordings go up here as I finish pieces. Software renders the recordings from the notation. No live performers.',
     worksHeading: 'Works',
     inProgressLabel: 'In progress',
     recordingLabel: 'Recording',
@@ -84,7 +85,7 @@ export const pages = {
   notFound: {
     title: 'Page not found',
     description: 'The requested page does not exist on this site.',
-    body: 'There’s nothing at this address. If you followed a link to get here, it’s probably out of date.',
+    body: 'Nothing lives at this address. If you followed a link here, the link is out of date.',
     homeLabel: 'Return to the home page',
   },
 } as const;

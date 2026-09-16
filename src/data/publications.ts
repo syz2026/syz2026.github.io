@@ -7,16 +7,28 @@ export type Publication = {
   href?: string;
   secondary?: { label: string; href: string };
   /**
-   * Only the journal article was peer reviewed. Listing the magazine piece
-   * beside it without saying so would let a reader assume both were, which is
-   * the same overstatement the research page's own intro warns against.
+   * Only the journal article was peer reviewed. The magazine piece was not, and
+   * the ICLR paper is still under review. Listing all three without saying so
+   * would let a reader assume peer review for every one, which is the same
+   * overstatement the research page's own intro warns against.
    */
-  kind: 'peer-reviewed' | 'magazine';
+  kind: 'peer-reviewed' | 'magazine' | 'in-submission';
   /** Shown when the byline does not make Stephen's part obvious. */
   authorshipNote?: string;
 };
 
 export const publications: Publication[] = [
+  // Under review, so it carries no link and no title. ICLR review is
+  // double-blind: naming the paper here would undo the anonymity the venue
+  // relies on. The entry records the submission and nothing more.
+  {
+    authors: 'Stephen Zhang',
+    year: 2026,
+    title: 'Paper under review',
+    venue: 'ICLR 2027',
+    detail: 'title withheld during anonymous review',
+    kind: 'in-submission',
+  },
   {
     authors: 'Laurel Fogarty, Stephen Zhang, Marcus W. Feldman',
     year: 2025,
