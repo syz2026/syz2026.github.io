@@ -82,7 +82,7 @@ export const experience: Position[] = [
     role: 'Intern',
     location: 'Remote',
     start: 'January 2026',
-    end: 'Present',
+    end: 'June 2026',
     bullets: [
       'Analyzed valuations of small and medium enterprises using standard financial methods',
       'Proposed and implemented service improvements with the engineering team',
