@@ -18,7 +18,7 @@ export const profile = {
   bio: [
     'I study mathematics and computer science at Stanford, with a minor in music (trumpet performance). I graduate in June 2028.',
     'I have worked in the Feldman Lab in Stanford’s biology department since 2023. I build stochastic, agent-based, and equation-based models of gene-culture coevolution in Python. I check the analytical results against simulation. The work produced a paper in Theoretical Population Biology in 2025. A second manuscript is under review.',
-    'At Alpha AI Engineering, I fine-tuned a sub-billion-parameter language model with LoRA. I also ran transformer pretraining sweeps on a SLURM cluster.',
+    'At Alpha AI Engineering, I fine-tuned a multi-billion-parameter language model with LoRA. I also ran transformer pretraining sweeps on a SLURM cluster.',
     'At EquityBound, I analyzed valuations of small and medium enterprises and audited the codebase behind them.',
     'I play trumpet and compose for orchestra. I am a Fellow of the Royal Schools of Music in trumpet performance. As Financial Officer of Stanford Orchestras, I manage a budget of more than $40,000.',
   ],
@@ -73,7 +73,7 @@ export const experience: Position[] = [
     start: 'June 2026',
     end: 'August 2026',
     bullets: [
-      'Fine-tuned a sub-1B-parameter language model with LoRA',
+      'Fine-tuned a multi-billion-parameter language model with LoRA',
       'Ran transformer pretraining sweeps on a SLURM cluster in PyTorch',
     ],
   },
