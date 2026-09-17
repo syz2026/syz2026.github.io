@@ -55,7 +55,7 @@ export const pages = {
     title: 'Music',
     description: 'Original compositions by Stephen Zhang, with scores and recordings.',
     intro:
-      'I compose for orchestra and smaller ensembles, and I play trumpet. Scores and recordings go up here as I finish pieces. Software renders the recordings from the notation. No live performers.',
+      'I play trumpet as my main musical passion and compose for orchestra in my free time. Scores and recordings go up here as I (hopefully) finish my compositions.',
     worksHeading: 'Works',
     inProgressLabel: 'In progress',
     recordingLabel: 'Recording',
