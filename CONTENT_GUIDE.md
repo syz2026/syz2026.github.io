@@ -71,7 +71,7 @@ Folder: `src/content/music/`. One file per work, for example
 | `title`           | yes      |                                                                      |
 | `year`            | yes      | Integer                                                              |
 | `instrumentation` | yes      | Free text, for example `Orchestra`                                   |
-| `blurb`           | yes      | One or two sentences for the card. Fold with `>-`, see below         |
+| `blurb`           | no       | One or two sentences for the card. Fold with `>-`, see below         |
 | `duration`        | no       | For example `9:56`                                                   |
 | `movements`       | no       | Array of `{ title, duration }`, titles unnumbered, see below         |
 | `audio`           | no       | Path under `public/`, for example `/media/audio/final-struggle.mp3`  |
@@ -86,7 +86,10 @@ Andante sostenuto". Write `"Andante sostenuto"` and let the page number it.
 
 The blurb becomes the page's `<meta name="description">`, so fold it with `>-`
 rather than `>`. A plain `>` keeps a trailing newline, which then sits inside
-the attribute value in the built HTML.
+the attribute value in the built HTML. Leave `blurb` out and the card and the
+page both drop the summary line, and the description falls back to one built
+from the title and instrumentation, because the build fails on a page with no
+description at all.
 
 An audio player appears only when `audio` is set, and a score link only when
 `score` is set. A work with neither still renders as a text entry, so pieces

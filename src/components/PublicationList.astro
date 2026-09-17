@@ -4,9 +4,14 @@ import { pages } from '../data/pages';
 
 interface Props {
   items: readonly Publication[];
+  /**
+   * Off under a heading that already names the review status, where the label
+   * would say the same thing twice.
+   */
+  showKind?: boolean;
 }
 
-const { items } = Astro.props;
+const { items, showKind = true } = Astro.props;
 const kindLabels = pages.research.kindLabels;
 ---
 
@@ -33,7 +38,7 @@ const kindLabels = pages.research.kindLabels;
             {pub.detail && `, ${pub.detail}`}
           </span>
           <span>{pub.year}</span>
-          <span class="kind">{kindLabels[pub.kind]}</span>
+          {showKind && <span class="kind">{kindLabels[pub.kind]}</span>}
           {pub.secondary && (
             <a href={pub.secondary.href} rel="noopener noreferrer">
               {pub.secondary.label}

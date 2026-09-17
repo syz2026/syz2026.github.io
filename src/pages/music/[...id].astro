@@ -25,9 +25,12 @@ const { Content } = await render(entry);
 // An entry without a program note would otherwise draw the prose block's rule
 // across the page with nothing under it.
 const hasNote = (entry.body ?? '').trim().length > 0;
+// The output validator fails any page without a meta description, so an entry
+// that carries no blurb gets one built from its frontmatter instead.
+const description = blurb ?? pages.music.entryDescription(title, instrumentation);
 ---
 
-<BaseLayout title={title} description={blurb} ogType="article">
+<BaseLayout title={title} description={description} ogType="article">
   <article>
     <p class="back">
       <a href="/music/"><span aria-hidden="true">&larr; </span>{pages.music.backLabel}</a>
@@ -50,7 +53,7 @@ const hasNote = (entry.body ?? '').trim().length > 0;
 
     <h1 class="page-title">{title}</h1>
 
-    <p class="blurb-lede">{blurb}</p>
+    {blurb && <p class="blurb-lede">{blurb}</p>}
 
     {audio && <AudioPlayer src={audio} title={title} />}
 

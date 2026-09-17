@@ -28,7 +28,7 @@ const { title, year, instrumentation, duration, blurb, status } = entry.data;
     <span>{instrumentation}</span>
     {duration && <span>{duration}</span>}
   </p>
-  <p class="summary">{blurb}</p>
+  {blurb && <p class="summary">{blurb}</p>}
 </li>
 
 <style>

@@ -26,8 +26,8 @@ export const pages = {
     title: 'Research',
     description:
       'Publications by Stephen Zhang: a peer-reviewed paper on gene-culture coevolution, a magazine article on combinatorics, and a paper under review at ICLR 2027.',
-    intro: 'Published and submitted work. Each entry names the venue and its review status.',
     publicationsHeading: 'Publications',
+    submissionsHeading: 'Submissions',
     kindLabels: {
       'peer-reviewed': 'Peer reviewed',
       magazine: 'Magazine article',
@@ -66,6 +66,10 @@ export const pages = {
     downloadLabel: 'Download the recording (MP3)',
     movementsHeading: 'Movements',
     backLabel: 'All works',
+    /* Every page needs a non-empty meta description or the build fails. An
+       entry that carries no blurb gets one built from its frontmatter. */
+    entryDescription: (title: string, instrumentation: string) =>
+      `${title}, for ${instrumentation.toLowerCase()}. Score and recording by Stephen Zhang.`,
   },
   cv: {
     title: 'Curriculum Vitae',
@@ -77,6 +81,7 @@ export const pages = {
       experience: 'Experience',
       research: 'Research',
       publications: 'Publications',
+      submissions: 'Submissions',
       activities: 'Activities',
       awards: 'Awards',
       skills: 'Skills',

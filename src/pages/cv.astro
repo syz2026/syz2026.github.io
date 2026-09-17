@@ -11,7 +11,7 @@ import {
   awards,
   skills,
 } from '../data/profile';
-import { publications } from '../data/publications';
+import { publications, submissions } from '../data/publications';
 import { pages, ui } from '../data/pages';
 ---
 
@@ -56,6 +56,15 @@ import { pages, ui } from '../data/pages';
     <h2 id="cv-publications">{pages.cv.sections.publications}</h2>
     <PublicationList items={publications} />
   </section>
+
+  {
+    submissions.length > 0 && (
+      <section class="section" aria-labelledby="cv-submissions">
+        <h2 id="cv-submissions">{pages.cv.sections.submissions}</h2>
+        <PublicationList items={submissions} showKind={false} />
+      </section>
+    )
+  }
 
   <section class="section" aria-labelledby="cv-activities">
     <h2 id="cv-activities">{pages.cv.sections.activities}</h2>

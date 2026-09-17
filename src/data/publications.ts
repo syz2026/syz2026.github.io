@@ -18,17 +18,6 @@ export type Publication = {
 };
 
 export const publications: Publication[] = [
-  // Under review, so it carries no link and no title. ICLR review is
-  // double-blind: naming the paper here would undo the anonymity the venue
-  // relies on. The entry records the submission and nothing more.
-  {
-    authors: 'Stephen Zhang',
-    year: 2026,
-    title: 'Paper under review',
-    venue: 'ICLR 2027',
-    detail: 'title withheld during anonymous review',
-    kind: 'in-submission',
-  },
   {
     authors: 'Laurel Fogarty, Stephen Zhang, Marcus W. Feldman',
     year: 2025,
@@ -56,5 +45,24 @@ export const publications: Publication[] = [
       href: 'https://pims.math.ca/sites/default/files/assets/publication_issue/file/Pi_in_the_sky2024%20%281%29.pdf',
     },
     kind: 'magazine',
+  },
+];
+
+/**
+ * Work sent out but not yet accepted. Kept apart from `publications` so a
+ * submission is never counted as a publication, which is the same distinction
+ * the `kind` field draws inside a single list.
+ */
+export const submissions: Publication[] = [
+  // Under review, so it carries no link and no title. ICLR review is
+  // double-blind: naming the paper here would undo the anonymity the venue
+  // relies on. The entry records the submission and nothing more.
+  {
+    authors: 'Stephen Zhang',
+    year: 2026,
+    title: 'Paper under review',
+    venue: 'ICLR 2027',
+    detail: 'title withheld during anonymous review',
+    kind: 'in-submission',
   },
 ];

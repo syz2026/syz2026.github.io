@@ -4,7 +4,7 @@ import PageHead from '../components/PageHead.astro';
 import PublicationList from '../components/PublicationList.astro';
 import ResearchCard from '../components/ResearchCard.astro';
 import SoftwareCard from '../components/SoftwareCard.astro';
-import { publications } from '../data/publications';
+import { publications, submissions } from '../data/publications';
 import { pages } from '../data/pages';
 import { getResearch, getSoftware } from '../lib/collections';
 
@@ -13,12 +13,21 @@ const software = await getSoftware();
 ---
 
 <BaseLayout title={pages.research.title} description={pages.research.description}>
-  <PageHead title={pages.research.title} lede={pages.research.intro} />
+  <PageHead title={pages.research.title} />
 
   <section class="section" aria-labelledby="publications-heading">
     <h2 id="publications-heading">{pages.research.publicationsHeading}</h2>
     <PublicationList items={publications} />
   </section>
+
+  {
+    submissions.length > 0 && (
+      <section class="section" aria-labelledby="submissions-heading">
+        <h2 id="submissions-heading">{pages.research.submissionsHeading}</h2>
+        <PublicationList items={submissions} showKind={false} />
+      </section>
+    )
+  }
 
   {
     research.length > 0 && (
